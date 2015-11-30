@@ -1,4 +1,13 @@
-<?php session_start()?>
+<?php session_start()
+if(!isset($_SESSION['id']))
+{
+	header('Location: ../../login.html');
+}
+
+
+
+
+?>
 
 <html>
 <head>
