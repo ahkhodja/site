@@ -191,7 +191,8 @@ $(document).ready(function() {
 									$("#chargement").hide();
 									
 									$("#contenu").after(data);
-									$('.lien').on('click', function() {
+									$('.lien').on('click', function(e) {
+										e.stopPropagation();
  alert($(':nth-child(4)',this).text());
 });
 									}});

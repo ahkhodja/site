@@ -440,7 +440,7 @@ var handleUpload=function(event){
 	
 	var handleUpload2=function(event){
 	
-	alert('submit formulaire');
+	
 	
 	
 	

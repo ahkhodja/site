@@ -1,45 +1,32 @@
-@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
 
 
-* {margin: 0; padding: 0;}
+* {
+	margin: 0;
+	text-transform: none;
+}
 
 html {
-	background-color: #ffffff;
-	background-image: url(../images/bg.png);
-	background-repeat: repeat-x;
-	padding-top: 0px;
-	padding-right: 0px;
-	padding-left: 0px;
-	padding-bottom: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;	/*-webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  /*background-size: cover; /* version standardisée */
+	
+	background: #ffffff;
+	
+
 }
 
 body {
-	font-family: Quicksand, arial, verdana;
-	height:100%;
-}
 
+	font-family: montserrat, arial, verdana;
+	height:100%;
+	
+}
+/*form styles*/
 
 #forme {
-	margin:50px auto;
-	max-width: 960px;
+	display:block; 
+	margin:30px auto;
+	width: 960px;
 	text-align: center;
-}
-#forme input, #forme  select{
-	padding: 5px;
-	border: 1px solid #686F9C;
-	border-radius: 3px;
-	margin-bottom: 10px;
-	box-sizing: border-box;
-	font-family: Quicksand;
-	color: #2C3E50;
-	background:#ffffff;
-	font-size: 13px;
-	cursor: pointer;
+	position: relative;
 }
 
 /*-------------------------------------------------------------header-----------------------------------------*/
@@ -62,54 +49,15 @@ body {
 	height: inherit;
 }
 #navbar .h_right{
-	display:block;
-	width:50px;
+	display: block;
+	/* [disabled]width:50px; */
 	height: 50px;
-	float:right; 
-	margin:10px;
-}
-#navbar .h_right li ul {
-	/*position:absolute; */
-	left:-999em; 
-	height:auto; 
-	width:140px;
-	padding:5px;
-	font-size: 13px;
-	font-weight: bold;
-	margin:0;
-	background-color: #000000;
-	border-bottom:1px solid #F96E10;
-}
-#navbar .h_right li{
-	width:100px;
-	margin: 0 5px;
-	padding:5px 10px 0 10px; 
-}
-#navbar .h_right li a{
-	margin:5px 0;
-	text-decoration: none;
-	color: #ffffff;
-}
-
-#navbar .h_right li a:hover, #navbar .h_right ul li.active a{
-	color: #F96E10;
-}
-
-#navbar .h_right li ul li a:hover{ /*liste des items du menu*/
-	float:right;
-	color: #000000;
-	background-color: #ffffff;
+	float: right;
+	margin: 10px;
 	
-}
-#navbar .h_right li ul li {
-	width:auto;
-	height:20px;
-	color: #ffffff;
-	background-color: #000000;
 	
-}
-#navbar .h_right li:hover ul, #navbar .h_right li li:hover ul{right:auto;}
 
+}
 #navbar .h_left{
 	display:block;
 	float:left; 
@@ -141,18 +89,19 @@ body {
 	position:absolute; 
 	left:-999em; 
 	height:auto; 
-	width:200px;
+	width:180px;
 	padding:5px;
 	font-size: 13px;
-	font-weight: bold;
+	font-weight: normal;
 	margin:0;
 	background-color: #000000;
 	border-left:1px solid #F96E10; 
 	border-bottom:1px solid #F96E10;
 }
 #navbar li ul li {
-	width:auto;
+	width:150px;
 	height:20px;
+	magin:0 0 0 0;
 	color: #ffffff;
 	background-color: #000000;
 	
@@ -164,11 +113,8 @@ body {
 #footer {
 	width: 100%;
 	height: 60px;
-	background: #000000;
-	margin-top: 10px;
-	margin-right: 0;
-	margin-left: 0;
-	margin-bottom: 0;
+	background:#000000;
+	margin:20% 0 0 0;
 	opacity: 0.5;
 	text-align: center;
 }
@@ -179,14 +125,24 @@ body {
 	font-size: 12px;
 	color:#ffffff;
 }
-#tableau{max-width:960px; width:90%; margin:10px 0 10px 4%; border-collapse:collapse; table-layout:auto; vertical-align:top; margin-bottom:15px; border:1px solid #CCCCCC;}
+#tableau{width:90%; margin:10px 0 10px 4%; border-collapse:collapse; table-layout:auto; vertical-align:top; margin-bottom:15px; border:1px solid #CCCCCC;}
 #tableau thead th{color:#FFFFFF; background-color:#1E80CC; border:1px solid #CCCCCC; border-collapse:collapse; text-align:center; table-layout:auto; vertical-align:middle;}
 #tableau tbody td{vertical-align:top; border-collapse:collapse; border-left:1px solid #CCCCCC; border-right:1px solid #CCCCCC;}
 #tableau thead th, table tbody td{padding:5px; border-collapse:collapse;}
 #tableau tbody tr.light{color:#666666; background-color:#F7F7F7;}
 #tableau tbody tr.dark{color:#666666; background-color:#E8E8E8;}
-#table{width:60%; margin:10px auto; margin-bottom:15px; }
 
+
+#abstract{
+	width: 100%;
+	height: 200px;
+	margin:0;
+	padding:0;
+	
+}
+#abstract p{
+font-size: 12px;
+}
 #forme fieldset {
 	background: #f7f7f7;
 	border: 0 none;
@@ -194,35 +150,35 @@ body {
 	box-shadow: 0 0 50px 1px rgba(0, 0, 0, 0.4);
 	padding: 20px ;
 	box-sizing: border-box;
-	width: 95%;
+	width: 900px;
 	/*height: auto;*/
 	margin: 5% 2%;
 	
 }
-#forme fieldset h2 {
-	color:#1E80CC;
-	font-size:14px; 
-	margin:10px 0; 
-	font-weight:normal; 
-	line-height:1.6em;
+/*Hide all except first div*/
+#forme fieldset:not(:first-of-type) {
+	display: none;
 }
-
-#forme fieldset h1 {
-	font-size:18px; 
-	margin:10px 0; 
-	font-weight:bold; 
-	line-height:1.6em;
-}
-
-#forme .border{
-	background: #f7f7f7;
-	margin:auto;
-	width:70%;
-	border:1px solid #cccccc; 
-	border-radius: 5px;
+/*inputs*/
+#forme input, #forme textarea, #forme  select {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	/* [disabled]margin-bottom: 10px; */
+	width: 100%;
 	box-sizing: border-box;
-	
-	
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+
+.erreur {
+	width:30%;
+	height: 20px;
+	display: inline;
+	/*/padding:auto;*/
+	color: #F00;
+	font-size: 12px;
 }
 /*buttons*/
 #forme .action-button {
@@ -252,57 +208,99 @@ body {
 	color: #666;
 	margin-bottom: 20px;
 }
-#contents{
-	font-family: "Helvetica ",Arial,sans-serif;
-	margin:30px auto;
-	max-width: 960px;
-	text-align: justify;
-	line-height:1.6em;
-	font-weight:normal;
+/*progressbar*/
+#progressbar {
+	margin: 30px 0 50px 0;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
 }
-#contents  h2{margin:10px 0; font-weight:bold; line-height:1.6em;}
-#contents .topics span{font-size:16px; margin:15px 0;}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	color:#000000;
+	font-size: 14px;
+	width: 25%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 40px;
+	line-height: 40px;
+	display: block;
+	font-size: 16px;
+	color: #333;
+	background: white;
+	border:1px solid #FF7F50;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+	/*margin: 0 40px 5px 0;*/
+}
 
-#menu_liste ul{
-	padding:10px 20px 10px;
-	list-style:none;
-	border-bottom:1px dotted #1E80CC; 
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
 }
-*  a{
-	color:#1E80CC;
-	text-decoration:none;
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #FF7F50;
+	color: white;
 }
 
-#back-top {
-  position: fixed;
-  bottom: 20px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  background: #222;  
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  zoom: 1;
-  filter: alpha(opacity=50);
-  opacity: 0.5;
-  z-index: 100;
-  display: none;
-  
+
+
+tr td textarea {
+	resize: none;
 }
-.fa:before{
-	font-size: 2em;
-	display: inline-block;
-	color: #fff;
-	font-family: FontAwesome;
+#forme fieldset #information {
+	text-align: left;
+}
+
+
+fieldset #information .text {
+	text-indent: 10px;
+	padding-left: 17px;
+	display: inline;
+}
+fieldset #information .labelinformation {
 	font-style: normal;
-	font-weight: normal;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	content: "\f106";
+	font-weight: bold;
 }
-.form .menu .titre_menu {
-	padding-left: 10px;
+fieldset #information .coauteurinfo {
+	margin-left: 10px;
+	text-align: left;
+
+}
+table {
+	table-layout: fixed;
+	overflow: ellipsis;
+}
+#forme fieldset #uploaded_progress {
+	width: 100px;
+	height: 36px;
+	border: 1px solid #111;
+	background-color: #292929;
+	display: inline-block;
+	
+	
+}
+#uploaded_progress div {
+	    height: 100%;
+    color: #fff;
+    text-align: right;
+    line-height: 31px; /* same as #progressBar height if we want text middle aligned */
+    width: 0;
+    background-color: #0099ff;
+}
+#forme fieldset #submit1 {
+	width: 70px;
+	height: 37px;
+	margin-top: 10px;
+}
+#forme fieldset #file {
+	width: 529px;
 }

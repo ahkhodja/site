@@ -46,7 +46,7 @@ $(function(){
 								{
 									if(data == 1)
 									{
-										window.location="../pages/ihm-bd/Authors/submission.php";
+										window.location="../pages/ihm-bd/Authors/usr_home.php";
 
 									}
 									else

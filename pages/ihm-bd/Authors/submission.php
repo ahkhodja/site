@@ -1,13 +1,13 @@
-<?php
-    session_start();
-?>
+<?php session_start()?>
 
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<title>AJAM | User Account</title>
+       
 		<link rel="stylesheet" href="css/personel_space.css" type="text/css" />
+		
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.easing.min.js"></script>
 </head>
@@ -183,7 +183,7 @@
 <br/>
 </fieldset>
 <fieldset>
-<h2 class="div-title">Validat informations</h2>
+<h2 class="div-title">instead of validate</h2>
 <h3 class="div-subtitle">Step 4</h3>
 <div id="information">
 <table width="855" border="0">
