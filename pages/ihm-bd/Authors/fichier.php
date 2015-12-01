@@ -1,5 +1,6 @@
 <?php 
 session_start();
+if(isset($_SESSION['id'])){
 $id=$_SESSION['id'];
 if(!empty($_FILES['file'])){
 	foreach($_FILES['file']['name'] as $key =>$name){
@@ -9,5 +10,9 @@ if(!empty($_FILES['file'])){
 	print_r($uploaded);
 	}
 
+}else{
 
+
+
+}
 ?>
