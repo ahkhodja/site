@@ -16,9 +16,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.css" type="text/css" />
+    <link rel="stylesheet" href="css/submission.css" type="text/css" />
 <link href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="css/cssboot.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, intial-scale=1.0">
+    <script src="../../js/jquery-1.9.1.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -97,17 +99,25 @@
     <div class ="col-xs-9">
 
         <div id="contenu">
-            <form  method="post" action="php/uploadarticle.php" id="forme"  enctype="multipart/form-data">
+
                 <div id="pi">
+                    <p>Paper information</p>
+                    <button class ="pull-right btn btn-primary" id="next_1">Next </button >
 
 
+
+                </div>
+                <div id="ac">
+
+                    <p>About co auteur</p>
 
                 </div>
 
 
 
 
-            </form>
+
+
         </div>
     </div>
 
@@ -118,6 +128,18 @@
     </footer>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $("#next_1").click(function () {
+            alert();
+            current_div = $(this).parent();
+            next_div = $(this).parent().next();
+            next_div.show();
+            current_div.hide();
 
+
+        });
+    });
+</script>
 </body>
 </html>
