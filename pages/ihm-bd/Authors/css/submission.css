@@ -1,3 +1,5 @@
 #contenu div:not(:first-of-type) {
     display: none;
+}.panel.panel-info .list-group .list-group-item.encours {
+	color: #000000;
 }
