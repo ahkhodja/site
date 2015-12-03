@@ -7,7 +7,6 @@
  */
 ?>
 
-
 <!doctype html>
 <html>
 <head>
@@ -60,21 +59,17 @@
     <div class="col-xs-3">
         <div class="col-sm-12"><div id="detaille">
 
-
-
-
-
             </div></div>
         <div class="col-sm-12">
             <div class="panel panel-info">
 
 
                 <div class="list-group">
-                    <a href="#" i class="list-group-item">
+                    <a href="#"  class="list-group-item encours">
                         &nbsp; 1. Paper informations
 
                     </a>
-                    <a href="" class="list-group-item">
+                    <a href="" class="list-group-item ">
                          &nbsp;2. About co-authors
 
                     </a>
@@ -89,10 +84,6 @@
 
                 </div>
 
-
-
-
-
             </div>
         </div></div>
 
@@ -102,6 +93,7 @@
 
                 <div id="pi">
                     <p>Paper information</p>
+
                     <button class ="pull-right btn btn-primary" id="next_1">Next </button >
 
 
@@ -131,7 +123,7 @@
 <script>
     $(document).ready(function() {
         $("#next_1").click(function () {
-            alert();
+
             current_div = $(this).parent();
             next_div = $(this).parent().next();
             next_div.show();
