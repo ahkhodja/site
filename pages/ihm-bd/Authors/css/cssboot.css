@@ -2,7 +2,7 @@
 
 
 body {
-	width: 1200px;
+	width: 1300px;
 	margin-right: auto;
 	margin-left: auto;
 	font-family: "Montserrat";
@@ -61,11 +61,10 @@ footer .panel {
 }
 .nav.navbar-nav li:hover {
 	background-color: #1F18C0;
-	background-color: #1F18C0;
-	border-bottom: 3px solid #231CCB;
+	border-bottom: 5px solid #231CCB;
 }
 .nav.navbar-nav  .active
  {
 	background-color: #1F18C0;
-	border-bottom: 3px solid #231CCB;
+	border-bottom: 5px solid #231CCB;
 }

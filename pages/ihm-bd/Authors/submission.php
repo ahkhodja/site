@@ -135,7 +135,7 @@
         					<td>
          					</td>
         					<td>
-        						<label for="note"><small>Keywords should be separated by semicolons, e.g. electroceramics; metallic ; ceramics. *</small></label>
+        						<label for="note"><small>Keywords should be separated by semicolons, e.g. electroceramics; metallic ; ceramics.</small></label>
         					</td>
                         </tr>
                         <tr>
