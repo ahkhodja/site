@@ -72,11 +72,11 @@
 
                     </a>
                     <a href=""  class="list-group-item">
-                        &nbsp;3. The manuscript files
+                        &nbsp;3. THE MANUSCRIPT FILES<i class =""></i>
 
                     </a>
                     <a href=""  class="list-group-item">
-                        &nbsp;4. Validate informations
+                        &nbsp;4. VALIDATE INFORMATIONS<i class =""></i>
 
                     </a>
 
@@ -204,8 +204,7 @@
 
                     </div>
                     <br/>
-                    <button class="pull-right btn btn-primary" id="next_1">Next</button>
-
+                    <button class="pull-right btn btn-primary" id="next_1">&nbsp;&nbsp;Next&nbsp;&nbsp;
 
 
 
@@ -218,7 +217,9 @@
                 <div id="ac" class="partie">
 
                     <legend> ABOUT CO-AUTEUR </legend>
-
+                    <div class="row" id="debut"><button class="col-lg-pull-5 btn btn-success" id="add">&nbsp;&nbsp;Add co-auteur&nbsp;&nbsp;</button><button class="btn btn-danger " id="remove">&nbsp;&nbsp;remove co-auteur&nbsp;&nbsp;</button></div>
+                    <span id="co1">
+                        <div class="row"><p class="text-center">Co-auteur 1</p> </div>
                     <div class="row">
 
                         <div class="form-group">
@@ -302,17 +303,25 @@
 
                             <div class="col-lg-8">
 
-                                <input type="email" class="form-control" id="text" placeholder ="Email.. ">
+                                <input type="email" class="form-control" id="text" placeholder ="Email ... ">
 
                             </div>
 
                         </div>
 
                     </div>
-                    <div class="row"><button class="col-lg-pull-5 btn btn-primary " id="add">&nbsp;&nbsp;Add co-auteur&nbsp;&nbsp;</button><br/></div>
+                        </span><span id="co2"></span>
 
+                    <button class="pull-left btn btn-primary" id="prev_1">Previous</button><button class="pull-right btn btn-primary" id="next_2">&nbsp;Next&nbsp;</button>
                 </div>
-
+                <div  class="partie">
+                    <legend> THE MANUSCRIPT FILES </legend>
+                    <button class="pull-left btn btn-primary" id="prev_2">Previous</button><button class="pull-right btn btn-primary" id="next_3">&nbsp;Next&nbsp;</button>
+                </div>
+                <div  class="partie">
+                    <legend> VALIDATE INFORMATIONS </legend>
+                    <button class="pull-left btn btn-primary" id="prev_3">Previous</button><button class="pull-right btn btn-success" id="next_4">&nbsp;Submit&nbsp;</button>
+                </div>
 
 
 
@@ -331,6 +340,7 @@
 
 <script>
     $(document).ready(function() {
+        var nbco=1;
         $("#next_1").click(function(e) {
             e.stopPropagation();
             current_div = $(this).parent();
@@ -342,6 +352,80 @@
             $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
             $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
             $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
+            return false;
+
+        });
+        $('#add').click(function(e){
+           nbco=nbco+1;
+
+                    $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"First Name ... \" name=\"fname_co"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"Middle Name ... \"name=\"mname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"last Name ... \" name=\"lname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"affiliation ... \"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"text\" placeholder =\"Middle Name ... \" rows=\"3\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"Email ... \"></div></div></div>");
+            $('#co'+nbco).after("<span id=\"co"+(nbco+1)+"\"></span>");
+            return false;
+
+        });
+        $('#remove').click(function(e){
+
+
+            $('#co'+nbco).remove();
+            $('#co'+(nbco+1)).remove();
+            if(nbco!=1){
+            $('#co'+(nbco-1)).after("<span id=\"co"+nbco+"\"></span>");}else{$('#debut').after("<span id=\"co"+nbco+"\"></span>")}
+            nbco=nbco-1;
+            return false;
+
+        });
+        $("#next_2").click(function(e) {
+            e.stopPropagation();
+            current_div = $(this).parent();
+            next_div = $(this).parent().next();
+            next_div.show();
+            current_div.hide();
+            $(".etape_progresse a").eq($(".partie").index(current_div)).removeClass("encours");
+            $(".etape_progresse a i").eq($(".partie").index(current_div)).removeClass("fa fa-pencil fa-1x pull-right");
+            $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
+            $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
+            $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
+            return false;
+
+        });
+        $("#next_3").click(function(e) {
+            e.stopPropagation();
+            current_div = $(this).parent();
+            next_div = $(this).parent().next();
+            next_div.show();
+            current_div.hide();
+            $(".etape_progresse a").eq($(".partie").index(current_div)).removeClass("encours");
+            $(".etape_progresse a i").eq($(".partie").index(current_div)).removeClass("fa fa-pencil fa-1x pull-right");
+            $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
+            $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
+            $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
+            return false;
+
+        });
+        $("#prev_1").click(function(){
+            current_div = $(this).parent();
+            previous_div = $(this).parent().prev();
+            previous_div.show();
+            current_div.hide();
+            easing: 'easeInOutBack'
+            return false;
+
+        });
+        $("#prev_2").click(function(){
+            current_div = $(this).parent();
+            previous_div = $(this).parent().prev();
+            previous_div.show();
+            current_div.hide();
+            easing: 'easeInOutBack'
+            return false;
+
+        });
+        $("#prev_3").click(function(){
+            current_div = $(this).parent();
+            previous_div = $(this).parent().prev();
+            previous_div.show();
+            current_div.hide();
+            easing: 'easeInOutBack'
             return false;
 
         });
