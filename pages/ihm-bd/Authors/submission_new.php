@@ -316,6 +316,32 @@
                 </div>
                 <div  class="partie">
                     <legend> THE MANUSCRIPT FILES </legend>
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label for="textarea" class="col-lg-2 control-label">Files Type : </label>
+
+                            <div class="col-lg-6">
+
+                                <select name="type_of_paper"  id="type_file" class="form-control" >
+                                    <option value="" selected >-- Please Select --</option>
+                                    <option value="latex">Word</option>
+                                    <option value="latex">Latex</option>
+
+                                </select>
+
+
+                            </div>
+                            <div class="col-lg-1 add">
+                                    <span class="btn btn-default btn-file">
+                                         Browse... <input type="file">
+                                    </span>
+                            </div>
+
+                        </div>
+
+                    </div>
                     <button class="pull-left btn btn-primary" id="prev_2">Previous</button><button class="pull-right btn btn-primary" id="next_3">&nbsp;Next&nbsp;</button>
                 </div>
                 <div  class="partie">
@@ -338,6 +364,7 @@
     </footer>
 </div>
 
+<!--suppress JSJQueryEfficiency -->
 <script>
     $(document).ready(function() {
         var nbco=1;
@@ -352,6 +379,7 @@
             $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
             $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
             $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
+            $('#remove').prop('disabled', false);
             return false;
 
         });
@@ -360,6 +388,7 @@
 
                     $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"First Name ... \" name=\"fname_co"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"Middle Name ... \"name=\"mname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"last Name ... \" name=\"lname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"affiliation ... \"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"text\" placeholder =\"Middle Name ... \" rows=\"3\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"Email ... \"></div></div></div>");
             $('#co'+nbco).after("<span id=\"co"+(nbco+1)+"\"></span>");
+            if(nbco!=0){ $('#remove').prop('disabled', false);}
             return false;
 
         });
@@ -369,7 +398,9 @@
             $('#co'+nbco).remove();
             $('#co'+(nbco+1)).remove();
             if(nbco!=1){
-            $('#co'+(nbco-1)).after("<span id=\"co"+nbco+"\"></span>");}else{$('#debut').after("<span id=\"co"+nbco+"\"></span>")}
+            $('#co'+(nbco-1)).after("<span id=\"co"+nbco+"\"></span>");}else{$('#debut').after("<span id=\"co"+nbco+"\"></span>")
+                $('#remove').prop('disabled', true);
+            }
             nbco=nbco-1;
             return false;
 
@@ -428,6 +459,16 @@
             easing: 'easeInOutBack'
             return false;
 
+        });
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+        $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+            console.log(numFiles);
+            console.log(label);
         });
     });
 </script>
