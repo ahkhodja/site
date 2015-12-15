@@ -88,7 +88,7 @@
     <div class ="col-xs-9">
 
         <div id="contenu">
-            <form class="form-horizontal col-lg-12">
+            <form class="form-horizontal col-lg-12" enctype="multipart/form-data">
                 <div id="pi" class="partie">
 
 
@@ -334,13 +334,47 @@
 
                             </div>
                             <div class="col-lg-1 add">
-                                    <span class="btn btn-default btn-file">
-                                         Browse... <input type="file">
+                                    <span class="btn btn-default btn-file" id="browse">
+                                         Browse... <input type="file" id="file">
                                     </span>
                             </div>
 
                         </div>
 
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered table-striped table-condensed">
+
+                            <caption>
+
+
+
+                            </caption>
+
+                            <thead>
+
+                            <tr>
+                                <th>File</th>
+                                <th>type</th>
+                                <th>taile</th>
+                                <th>state</th>
+                                <th>Action</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="file_title">Grand Mekong</td>
+                                <td>Demande croissante de certaines parties de l’animal pour la médecine chinoise traditionnelle
+
+                                    et fragmentation des habitats du fait du développement non durable d’infrastructures</td>
+                                <td>Grand Mekong</td>
+                                <td>Grand Mekong</td>
+                                <td>Grand Mekong</td>
+                            </tr>
+                            </tbody>
+
+                        </table>
                     </div>
                     <button class="pull-left btn btn-primary" id="prev_2">Previous</button><button class="pull-right btn btn-primary" id="next_3">&nbsp;Next&nbsp;</button>
                 </div>
@@ -367,6 +401,7 @@
 <!--suppress JSJQueryEfficiency -->
 <script>
     $(document).ready(function() {
+        $('#browse').hide();
         var nbco=1;
         $("#next_1").click(function(e) {
             e.stopPropagation();
@@ -460,16 +495,23 @@
             return false;
 
         });
+        $('#type_file').change(function() {
+            if($('#type_file').val()==''){
+                $('#browse').hide();
+            }else
+            {
+                $('#browse').show();
+            }
+
+        });
         $(document).on('change', '.btn-file :file', function() {
-            var input = $(this),
-                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [numFiles, label]);
+            var input = $(this);
+
+                $('#file_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
+            var fileInput=document.getElementById('file');
+alert(fileInput.files[0].size/1024/1024);
         });
-        $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-            console.log(numFiles);
-            console.log(label);
-        });
+
     });
 </script>
 </body>
