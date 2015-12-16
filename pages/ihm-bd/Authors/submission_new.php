@@ -326,7 +326,7 @@
 
                                 <select name="type_of_paper"  id="type_file" class="form-control" >
                                     <option value="" selected >-- Please Select --</option>
-                                    <option value="latex">Word</option>
+                                    <option value="word">Word</option>
                                     <option value="latex">Latex</option>
 
                                 </select>
@@ -346,13 +346,8 @@
                         <table class="table table-bordered table-striped table-condensed">
 
                             <caption>
-
-
-
                             </caption>
-
                             <thead>
-
                             <tr>
                                 <th>File</th>
                                 <th>type</th>
@@ -360,17 +355,21 @@
                                 <th>state</th>
                                 <th>Action</th>
                             </tr>
-
                             </thead>
                             <tbody>
                             <tr>
-                                <td id="file_title">Grand Mekong</td>
-                                <td>Demande croissante de certaines parties de l’animal pour la médecine chinoise traditionnelle
-
-                                    et fragmentation des habitats du fait du développement non durable d’infrastructures</td>
-                                <td>Grand Mekong</td>
-                                <td>Grand Mekong</td>
-                                <td>Grand Mekong</td>
+                                <td id="file_title">----</td>
+                                <td id="file_type">----</td>
+                                <td id="file_taille">----</td>
+                                <td>
+                                    <div class="progress bar">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                             aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                            0%
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><button type="button" class="btn btn-danger btn_smal" id="delete"><i class ="fa fa-trash-o fa-1x "></i></button></td>
                             </tr>
                             </tbody>
 
@@ -399,7 +398,7 @@
 </div>
 
 <!--suppress JSJQueryEfficiency -->
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('#browse').hide();
         var nbco=1;
@@ -504,12 +503,77 @@
             }
 
         });
+        function getExtension(filename)
+        {
+            var parts = filename.split(".");
+            return (parts[(parts.length-1)]);
+        }
+        function verifFileExtension(champ,listeExt)
+        {   var resultat=false;
+            filename = document.getElementById(champ).value.toLowerCase();
+            fileExt = getExtension(filename);
+            for (i=0; i<listeExt.length; i++)
+            {
+                if ( fileExt == listeExt[i] )
+                {
+                    resultat=true;
+                }
+            }
+
+            return resultat;
+        }
         $(document).on('change', '.btn-file :file', function() {
             var input = $(this);
-
+            var extensionsValides;
+            var file_t=$("#type_file").val();
+            if(file_t=="latex"){
+                extensionsValides=new Array('tex');
+            }else
+            {
+                if(file_t=="word") {
+                    extensionsValides=new Array('doc','docx');
+                }
+            }
+            var res=verifFileExtension('file',extensionsValides);
+            if (res){
                 $('#file_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
-            var fileInput=document.getElementById('file');
-alert(fileInput.files[0].size/1024/1024);
+                var fileInput=document.getElementById('file');
+                $("#file_taille").html((fileInput.files[0].size/1024/1024).toFixed(2)+' Mo');
+                $("#file_type").html($("#type_file").val());
+                var data= new FormData();
+                data.append('ajax','true');
+                data.append('file',fileInput.files[0]);
+                data.append('id',15);
+                var request= new XMLHttpRequest();
+                request.upload.addEventListener('progress',function(event) {
+                    if (event.lengthComputable) {
+                        var percent = event.loaded / event.total;
+                        var progresse = Math.round(percent * 100);
+                        $('.progress-bar').width(progresse+'%');
+                        $('.progress-bar').html(progresse+'%')
+                    }
+
+                });
+                request.upload.addEventListener('load',function(event){
+                    console.log('ok');
+                    uploaded=true;
+                });
+                request.upload.addEventListener('error',function(event){
+                    alert('upload fail');
+                });
+                request.open('POST','fichier.php');
+                request.setRequestHeader('Cache-control','no-cache');
+                request.send(data);
+
+            }else
+            {
+                alert('type de fichier invalide');
+            }
+
+
+        });
+        $("#delete").click(function(){
+
         });
 
     });
