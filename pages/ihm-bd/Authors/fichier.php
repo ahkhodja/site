@@ -1,18 +1,17 @@
 <?php 
 session_start();
-if(isset($_SESSION['id'])){
-$id=$_SESSION['id'];
+//if(isset($_SESSION['id'])){
+$id=15;
+	//$_SESSION['id'];
+$name=$_FILES['file']['name'];
 if(!empty($_FILES['file'])){
-	foreach($_FILES['file']['name'] as $key =>$name){
-		if($_FILES['file']['error'][$key]==0 && move_uploaded_file($_FILES['file']['tmp_name'][$key],"files/".$id."/temp/{$name}")){$uploaded[]=$name;}
-		}
+
+		if($_FILES['file']['error']==0 && move_uploaded_file($_FILES['file']['tmp_name'],"files/".$id."/temp/{$name}")){$uploaded[]=$name;}
+
 	
 	print_r($uploaded);
 	}
 
-}else{
-
-
-
-}
+//}else{
+//}
 ?>
