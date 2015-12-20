@@ -325,7 +325,7 @@
                             <div class="col-lg-6">
 
                                 <select name="type_of_paper"  id="type_file" class="form-control" >
-                                    <option value="" selected >-- Please Select --</option>
+                                    <option value="" selected="selected" >-- Please Select --</option>
                                     <option value="word">Word</option>
                                     <option value="latex">Latex</option>
 
@@ -335,7 +335,7 @@
                             </div>
                             <div class="col-lg-1 add">
                                     <span class="btn btn-default btn-file" id="browse">
-                                         Browse... <input type="file" id="file">
+                                         Browse... <input type="file" id="main">
                                     </span>
                             </div>
 
@@ -343,28 +343,28 @@
 
                     </div>
                     <div class="row">
-                        <table class="table table-bordered table-striped table-condensed">
+                        <table class="table  table-striped table-condensed">
 
                             <caption>
                             </caption>
                             <thead>
                             <tr>
-                                <th>File</th>
-                                <th>type</th>
-                                <th>taile</th>
-                                <th>state</th>
-                                <th>Action</th>
+                                <th width="65%" class="text-center">Main File</th>
+                                <th width="5%" class="text-center">type</th>
+                                <th width="10%" class="text-center">taile</th>
+                                <th width="15%" class="text-center">state</th>
+                                <th width="5%" class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td id="file_title">----</td>
-                                <td id="file_type">----</td>
-                                <td id="file_taille">----</td>
+                                <td id="file_title" class="text-center">----</td>
+                                <td id="file_type" class="text-center">----</td>
+                                <td id="file_taille" class="text-center">----</td>
                                 <td>
                                     <div class="progress bar">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                             aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                             aria-valuemin="0" aria-valuemax="100" style="width:0%" id="main_progresse">
                                             0%
                                         </div>
                                     </div>
@@ -374,8 +374,34 @@
                             </tbody>
 
                         </table>
+
                     </div>
+                    <div class="row">
+                        <span class="btn btn-default btn-file" id="add_images">
+                                         Add picture <input type="file" id="image">
+                                    </span>
+                        <table class="table  table-striped table-condensed table_image">
+
+                            <caption>
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th width="65%" class="text-center">Image</th>
+                                <th width="5%" class="text-center">type</th>
+                                <th width="10%" class="text-center">taile</th>
+                                <th width="15%" class="text-center">state</th>
+                                <th width="5%" class="text-center">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
                     <button class="pull-left btn btn-primary" id="prev_2">Previous</button><button class="pull-right btn btn-primary" id="next_3">&nbsp;Next&nbsp;</button>
+
                 </div>
                 <div  class="partie">
                     <legend> VALIDATE INFORMATIONS </legend>
@@ -398,185 +424,6 @@
 </div>
 
 <!--suppress JSJQueryEfficiency -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#browse').hide();
-        var nbco=1;
-        $("#next_1").click(function(e) {
-            e.stopPropagation();
-            current_div = $(this).parent();
-            next_div = $(this).parent().next();
-            next_div.show();
-            current_div.hide();
-            $(".etape_progresse a").eq($(".partie").index(current_div)).removeClass("encours");
-            $(".etape_progresse a i").eq($(".partie").index(current_div)).removeClass("fa fa-pencil fa-1x pull-right");
-            $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
-            $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
-            $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
-            $('#remove').prop('disabled', false);
-            return false;
-
-        });
-        $('#add').click(function(e){
-           nbco=nbco+1;
-
-                    $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"First Name ... \" name=\"fname_co"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"Middle Name ... \"name=\"mname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"last Name ... \" name=\"lname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"affiliation ... \"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"text\" placeholder =\"Middle Name ... \" rows=\"3\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"text\" placeholder =\"Email ... \"></div></div></div>");
-            $('#co'+nbco).after("<span id=\"co"+(nbco+1)+"\"></span>");
-            if(nbco!=0){ $('#remove').prop('disabled', false);}
-            return false;
-
-        });
-        $('#remove').click(function(e){
-
-
-            $('#co'+nbco).remove();
-            $('#co'+(nbco+1)).remove();
-            if(nbco!=1){
-            $('#co'+(nbco-1)).after("<span id=\"co"+nbco+"\"></span>");}else{$('#debut').after("<span id=\"co"+nbco+"\"></span>")
-                $('#remove').prop('disabled', true);
-            }
-            nbco=nbco-1;
-            return false;
-
-        });
-        $("#next_2").click(function(e) {
-            e.stopPropagation();
-            current_div = $(this).parent();
-            next_div = $(this).parent().next();
-            next_div.show();
-            current_div.hide();
-            $(".etape_progresse a").eq($(".partie").index(current_div)).removeClass("encours");
-            $(".etape_progresse a i").eq($(".partie").index(current_div)).removeClass("fa fa-pencil fa-1x pull-right");
-            $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
-            $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
-            $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
-            return false;
-
-        });
-        $("#next_3").click(function(e) {
-            e.stopPropagation();
-            current_div = $(this).parent();
-            next_div = $(this).parent().next();
-            next_div.show();
-            current_div.hide();
-            $(".etape_progresse a").eq($(".partie").index(current_div)).removeClass("encours");
-            $(".etape_progresse a i").eq($(".partie").index(current_div)).removeClass("fa fa-pencil fa-1x pull-right");
-            $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
-            $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
-            $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
-            return false;
-
-        });
-        $("#prev_1").click(function(){
-            current_div = $(this).parent();
-            previous_div = $(this).parent().prev();
-            previous_div.show();
-            current_div.hide();
-            easing: 'easeInOutBack'
-            return false;
-
-        });
-        $("#prev_2").click(function(){
-            current_div = $(this).parent();
-            previous_div = $(this).parent().prev();
-            previous_div.show();
-            current_div.hide();
-            easing: 'easeInOutBack'
-            return false;
-
-        });
-        $("#prev_3").click(function(){
-            current_div = $(this).parent();
-            previous_div = $(this).parent().prev();
-            previous_div.show();
-            current_div.hide();
-            easing: 'easeInOutBack'
-            return false;
-
-        });
-        $('#type_file').change(function() {
-            if($('#type_file').val()==''){
-                $('#browse').hide();
-            }else
-            {
-                $('#browse').show();
-            }
-
-        });
-        function getExtension(filename)
-        {
-            var parts = filename.split(".");
-            return (parts[(parts.length-1)]);
-        }
-        function verifFileExtension(champ,listeExt)
-        {   var resultat=false;
-            filename = document.getElementById(champ).value.toLowerCase();
-            fileExt = getExtension(filename);
-            for (i=0; i<listeExt.length; i++)
-            {
-                if ( fileExt == listeExt[i] )
-                {
-                    resultat=true;
-                }
-            }
-
-            return resultat;
-        }
-        $(document).on('change', '.btn-file :file', function() {
-            var input = $(this);
-            var extensionsValides;
-            var file_t=$("#type_file").val();
-            if(file_t=="latex"){
-                extensionsValides=new Array('tex');
-            }else
-            {
-                if(file_t=="word") {
-                    extensionsValides=new Array('doc','docx');
-                }
-            }
-            var res=verifFileExtension('file',extensionsValides);
-            if (res){
-                $('#file_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
-                var fileInput=document.getElementById('file');
-                $("#file_taille").html((fileInput.files[0].size/1024/1024).toFixed(2)+' Mo');
-                $("#file_type").html($("#type_file").val());
-                var data= new FormData();
-                data.append('ajax','true');
-                data.append('file',fileInput.files[0]);
-                data.append('id',15);
-                var request= new XMLHttpRequest();
-                request.upload.addEventListener('progress',function(event) {
-                    if (event.lengthComputable) {
-                        var percent = event.loaded / event.total;
-                        var progresse = Math.round(percent * 100);
-                        $('.progress-bar').width(progresse+'%');
-                        $('.progress-bar').html(progresse+'%')
-                    }
-
-                });
-                request.upload.addEventListener('load',function(event){
-                    console.log('ok');
-                    uploaded=true;
-                });
-                request.upload.addEventListener('error',function(event){
-                    alert('upload fail');
-                });
-                request.open('POST','fichier.php');
-                request.setRequestHeader('Cache-control','no-cache');
-                request.send(data);
-
-            }else
-            {
-                alert('type de fichier invalide');
-            }
-
-
-        });
-        $("#delete").click(function(){
-
-        });
-
-    });
-</script>
+<script type="text/javascript" src="js/submission.js"></script>
 </body>
 </html>
