@@ -7,3 +7,37 @@ footer{
 
     margin-top: 10px;
 }
+#co1{min-height: 50px;}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.bar{
+    margin-bottom: 0px;
+
+}
+.btn_smal{
+   padding: 1px 7px;
+}
+.texte{
+	color: #4D4B4B;
+	font-family: montserrat;
+	font-style: normal;
+	font-weight: 400;
+}
