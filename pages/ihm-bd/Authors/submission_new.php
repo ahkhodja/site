@@ -107,7 +107,7 @@
 
                                 <div class="col-lg-10">
 
-                                    <input type="text" class="form-control" id="text" placeholder ="Title ... ">
+                                    <input type="text" class="form-control" id="title" placeholder ="Title ... " name="title">
 
                                 </div>
 
@@ -123,7 +123,7 @@
 
                                 <div class="col-lg-10">
 
-                                    <select name="type_of_paper"  id="type" class="form-control" >
+                                    <select name="type"  id="type" class="form-control">
                                         <option value="" >-- Please Select --</option>
                                         <option value='review'>Review article</option>
                                         <option value='regular'>Regular paper</option>
@@ -144,7 +144,7 @@
                             <div class="form-group">
                                 <label for="select" class="col-lg-2 control-label">Areas of Article : </label>
                                 <div class="col-lg-10">
-                                    <select id="select" class="form-control" >
+                                    <select name="area" id="area" class="form-control" >
                                         <option value="">-- Please Select --</option>
                                         <option value="biomaterials">Biomaterials</option>
                                         <option value="catalysis_surface science">Catalysis/surface science</option>
@@ -181,7 +181,7 @@
 
                             <div class="col-lg-10">
 
-                                <textarea  class="form-control" id="text" placeholder ="Abstract ... " rows="8"></textarea>
+                                <textarea name="abstract"  class="form-control" id="text" placeholder ="Abstract ... " rows="8"></textarea>
 
                             </div>
 
@@ -196,7 +196,7 @@
 
                             <div class="col-lg-10">
 
-                                <textarea  class="form-control" id="text" placeholder ="Keywords should be separated by semicolons, e.g. electroceramics; metallic ; ceramics. *"></textarea>
+                                <textarea  name="keyword" class="form-control" id="text" placeholder ="Keywords should be separated by semicolons, e.g. electroceramics; metallic ; ceramics. *"></textarea>
 
                             </div>
 
@@ -352,7 +352,7 @@
                                 <th width="65%" class="text-center">Main File</th>
                                 <th width="5%" class="text-center">type</th>
                                 <th width="10%" class="text-center">taile</th>
-                                <th width="15%" class="text-center">state</th>
+                                <th width="15%" class="text-center">Progression</th>
                                 <th width="5%" class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -378,7 +378,7 @@
                     </div>
                     <div class="row">
                         <span class="btn btn-default btn-file" id="add_images">
-                                         Add picture <input type="file" id="image">
+                                         Add Figure <input type="file" id="image">
                                     </span>
                         <table class="table  table-striped table-condensed table_image">
 
@@ -386,10 +386,10 @@
                             </caption>
                             <thead>
                             <tr>
-                                <th width="65%" class="text-center">Image</th>
+                                <th width="65%" class="text-center">Images</th>
                                 <th width="5%" class="text-center">type</th>
                                 <th width="10%" class="text-center">taile</th>
-                                <th width="15%" class="text-center">state</th>
+                                <th width="15%" class="text-center">Progression</th>
                                 <th width="5%" class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -404,7 +404,84 @@
 
                 </div>
                 <div  class="partie">
-                    <legend> VALIDATE INFORMATIONS </legend>
+
+                    <div class="form-group">
+                        <legend> VALIDATE INFORMATIONS </legend>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label for="text" class="col-lg-2 control-label">Title : </label>
+
+                            <div class="col-lg-10">
+
+                                <label for="text" class=" control-label text-left texte"id="titre" > </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label for="textarea" class="col-lg-2 control-label">Article Type : </label>
+
+                            <div class="col-lg-10">
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Areas of Article : </label>
+                            <div class="col-lg-10">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label for="text" class="col-lg-2 control-label">Abstract : </label>
+
+                            <div class="col-lg-10">
+
+                                
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label for="text" class="col-lg-2 control-label">Keywords : </label>
+
+                            <div class="col-lg-10">
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
                     <button class="pull-left btn btn-primary" id="prev_3">Previous</button><button class="pull-right btn btn-success" id="next_4">&nbsp;Submit&nbsp;</button>
                 </div>
 
