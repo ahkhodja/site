@@ -125,12 +125,12 @@
 
                                     <select name="type"  id="type" class="form-control">
                                         <option value="" >-- Please Select --</option>
-                                        <option value='review'>Review article</option>
-                                        <option value='regular'>Regular paper</option>
-                                        <option value="application">Application</option>
-                                        <option value="communication">Communication</option>
-                                        <option value="feature_article">Feature Article</option>
-                                        <option value="highlight">Highlight</option>
+                                        <option value='Review article'>Review article</option>
+                                        <option value='Regular paper'>Regular paper</option>
+                                        <option value="Application">Application</option>
+                                        <option value="Communication">Communication</option>
+                                        <option value="Feature Article">Feature Article</option>
+                                        <option value="Highlight">Highlight</option>
                                     </select>
 
                                 </div>
@@ -146,15 +146,15 @@
                                 <div class="col-lg-10">
                                     <select name="area" id="area" class="form-control" >
                                         <option value="">-- Please Select --</option>
-                                        <option value="biomaterials">Biomaterials</option>
-                                        <option value="catalysis_surface science">Catalysis/surface science</option>
-                                        <option value="ceramics">Ceramics</option>
-                                        <option value='chemical_properties'>Chemical properties</option>
-                                        <option value="electrical_magnetic_organic_materials">Electrical/magnetic organic materials</option>
-                                        <option value="electrical_magnetic_inorganic_materials">Electronic/ magnetic inorganic materials</option>
-                                        <option value='inorganics_materials'>Inorganics materials</option>
-                                        <option value="liquid_crystals">Liquid crystals</option>
-                                        <option value='magnetic_properties'>Magnetic properties</option>
+                                        <option value="Biomaterials">Biomaterials</option>
+                                        <option value="Catalysis/surface science">Catalysis/surface science</option>
+                                        <option value="Ceramics">Ceramics</option>
+                                        <option value='Chemical properties'>Chemical properties</option>
+                                        <option value="Electrical/magnetic organic materials">Electrical/magnetic organic materials</option>
+                                        <option value="Electronic/ magnetic inorganic materials">Electronic/ magnetic inorganic materials</option>
+                                        <option value='Inorganics materials'>Inorganics materials</option>
+                                        <option value="Liquid crystals">Liquid crystals</option>
+                                        <option value='Magnetic properties'>Magnetic properties</option>
                                         <option value="metals_and_alloys">Metals and Alloys</option>
                                         <option value="nanotechnology">Nanotechnology</option>
                                         <option value="optical_organic_materials">Optical organic materials</option>
@@ -181,7 +181,7 @@
 
                             <div class="col-lg-10">
 
-                                <textarea name="abstract"  class="form-control" id="text" placeholder ="Abstract ... " rows="8"></textarea>
+                                <textarea name="abstract"  class="form-control" id="abstract" placeholder ="Abstract ... " rows="8"></textarea>
 
                             </div>
 
@@ -434,7 +434,7 @@
 
                             <div class="col-lg-10">
 
-
+                                <label for="text" class=" control-label text-left texte"id="type_article" > </label>
 
                             </div>
 
@@ -447,7 +447,7 @@
                         <div class="form-group">
                             <label for="select" class="col-lg-2 control-label">Areas of Article : </label>
                             <div class="col-lg-10">
-
+                                <label for="text" class=" control-label text-left texte"id="area_article" > </label>
                             </div>
 
                         </div>
@@ -460,7 +460,7 @@
 
                             <div class="col-lg-10">
 
-                                
+                                <label for="text" class=" control-label text-left texte"id="abstract_article" > </label>
 
                             </div>
 
@@ -482,6 +482,7 @@
                         </div>
 
                     </div>
+                        <legend></legend>
                     <button class="pull-left btn btn-primary" id="prev_3">Previous</button><button class="pull-right btn btn-success" id="next_4">&nbsp;Submit&nbsp;</button>
                 </div>
 
