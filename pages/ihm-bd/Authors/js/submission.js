@@ -69,6 +69,11 @@ $(document).ready(function() {
         $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
         $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
         $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
+
+        $('#titre').text($('#title').val());
+        $('#type_article').text($('#type').val());
+        $('#area_article').text($('#area').val());
+        $('#abstract_article').text($('#abstract').val());
         return false;
 
     });
