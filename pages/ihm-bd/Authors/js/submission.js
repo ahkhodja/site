@@ -231,9 +231,8 @@ $(document).ready(function() {
                 $(".delete_im").on('click',function(){
                     var courant=$(this).parent();
                     var index = $(".block tr").index(courant.parent());
-                    $(".block tr:nth-child("+index+")").hide( "slow" );
-                    //$(".block tr:nth-child("+index+")").remove();
-                   // alert(index);
+                    $(".block tr:nth-child("+(index+1)+")").hide( "slow" );
+
 
                 });
 
@@ -250,8 +249,12 @@ $(document).ready(function() {
         alert('type de fichier invalide');
     }
     });
-    $("#delete_im").click(function(){
-            alert($(this).index());
+    $("#delete").click(function(){
+        $('#file_title').html('------');
+        $("#file_taille").html('------');
+        $("#file_type").html('------');
+        $('#main_progresse').width('0%');
+        $('#main_progresse').html('0%');
     });
 
 
