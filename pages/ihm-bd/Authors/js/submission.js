@@ -2,7 +2,7 @@
  * Created by URTI on 20/12/2015.
  */
 $(document).ready(function() {
-    var numimg=1;
+    var numimg=0;
     $('#browse').hide();
     $('#add_images').hide();
     $('.table_image').hide();
@@ -202,10 +202,11 @@ $(document).ready(function() {
 
         if (res){
             $(".table_image").show();
-            $(".table_image tbody").append(" <tr><td  class=\"text-center\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td><div class=\"progress bar\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"70\"aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\" id=\"img_progresse"+numimg+"\">0%</div></div></td><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
+            $(".table_image tbody").append(" <tr><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td><div class=\"progress bar\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"70\"aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\" id=\"img_progresse"+(numimg+1)+"\">0%</div></div></td><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
             $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
             $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
             $("#img_type").html(getExtension(input.val()).toUpperCase());
+
 
              var data= new FormData();
              data.append('ajax','true');
@@ -216,25 +217,39 @@ $(document).ready(function() {
              if (event.lengthComputable) {
              var percent = event.loaded / event.total;
              var progresse = Math.round(percent * 100);
-             $('#img_progresse'+numimg+'').width(progresse+'%');
-             $('#img_progresse'+numimg+'').html(progresse+'%')
+             $('#img_progresse'+(numimg+1)).width(progresse+'%');
+             $('#img_progresse'+(numimg+1)).html(progresse+'%');
              }
                 if(progresse==100){
                     numimg=numimg+1;
 
                 }
-
+                 console.log("finiupload"+numimg);
              });
             request.upload.addEventListener('load',function(event){
                 console.log('ok');
-                uploaded=true;
                 $(".delete_im").on('click',function(){
                     var courant=$(this).parent();
                     var index = $(".block tr").index(courant.parent());
-                    $(".block tr:nth-child("+(index+1)+")").hide( "slow" );
 
+
+
+
+                    for(var j=(index+2);j<=numimg;j++){
+
+                        $(".block tr:nth-child("+j+") td:nth-child(1)").attr('id',"image_title"+(j)+"");
+                        $(".block tr:nth-child("+j+") td:nth-child(2)").attr('id',"image_extension"+(j)+"");
+                        $(".block tr:nth-child("+j+") td:nth-child(3)").attr('id',"image_size"+(j)+"");
+                        $(".block tr:nth-child("+j+") td:nth-child(4) div div"  ).attr('id',"img_progresse"+(j)+"");
+
+                    }
+
+                    $(".block tr:nth-child("+(index+1)+")").remove();
+                    numimg=$(".block tr").length;
+                    console.log(numimg);
 
                 });
+
 
             });
             request.upload.addEventListener('error',function(event){
