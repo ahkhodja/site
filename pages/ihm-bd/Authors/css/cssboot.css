@@ -1,11 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
-
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 body {
 	width: 1300px;
 	margin-right: auto;
 	margin-left: auto;
-	font-family: "Montserrat";
+	font-family: "Roboto";
+	background-color: #F5F5F5;
 }
 
 
