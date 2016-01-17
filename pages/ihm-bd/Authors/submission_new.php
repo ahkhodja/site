@@ -228,7 +228,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="text" placeholder ="First Name ... ">
+                                <input type="text" class="form-control" id="co_fn1" placeholder ="First Name ... ">
 
                             </div>
 
@@ -243,7 +243,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="text" placeholder ="Middle Name ... ">
+                                <input type="text" class="form-control" id="co_mn1" placeholder ="Middle Name ... ">
 
                             </div>
 
@@ -258,7 +258,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="text" placeholder ="Last Name ... ">
+                                <input type="text" class="form-control" id="co_ln1" placeholder ="Last Name ... ">
 
                             </div>
 
@@ -273,7 +273,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="text" placeholder ="Affiliation ... ">
+                                <input type="text" class="form-control" id="co_af1" placeholder ="Affiliation ... ">
 
                             </div>
 
@@ -288,7 +288,7 @@
 
                             <div class="col-lg-8">
 
-                                <textarea  class="form-control" id="text" placeholder ="Adresse ... " rows="3"></textarea>
+                                <textarea  class="form-control" id="co_ad1" placeholder ="Adresse ... " rows="3"></textarea>
 
                             </div>
 
@@ -303,7 +303,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="email" class="form-control" id="text" placeholder ="Email ... ">
+                                <input type="email" class="form-control" id="co_em1" placeholder ="Email ... ">
 
                             </div>
 
@@ -349,11 +349,11 @@
                             </caption>
                             <thead>
                             <tr>
-                                <th width="65%" class="text-center">Main File</th>
-                                <th width="5%" class="text-center">type</th>
-                                <th width="10%" class="text-center">taile</th>
-                                <th width="15%" class="text-center">Progression</th>
-                                <th width="5%" class="text-center">Action</th>
+                                <th width="65%" class="text-center">MAIN FILE</th>
+                                <th width="5%" class="text-center">TYPE</th>
+                                <th width="10%" class="text-center">SIZE</th>
+                                <th width="15%" class="text-center">PROGRESSION</th>
+                                <th width="5%" class="text-center">ACTION</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -378,7 +378,7 @@
                     </div>
                     <div class="row">
                         <span class="btn btn-default btn-file" id="add_images">
-                                         Add Figure <input type="file" id="image">
+                                         ADD FIGURES <input type="file" id="image">
                                     </span>
                         <table class="table  table-striped table-condensed table_image">
 
@@ -386,14 +386,14 @@
                             </caption>
                             <thead>
                             <tr>
-                                <th width="65%" class="text-center">Images</th>
-                                <th width="5%" class="text-center">type</th>
-                                <th width="10%" class="text-center">taile</th>
-                                <th width="15%" class="text-center">Progression</th>
-                                <th width="5%" class="text-center">Action</th>
+                                <th width="65%" class="text-center">IMAGES</th>
+                                <th width="5%" class="text-center">TYPE</th>
+                                <th width="10%" class="text-center">SIZE</th>
+                                <th width="15%" class="text-center">PROGRESSION</th>
+                                <th width="5%" class="text-center">ACTION</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="block">
 
                             </tbody>
 
@@ -460,7 +460,7 @@
 
                             <div class="col-lg-10">
 
-                                <label for="text" class=" control-label text-left texte"id="abstract_article" > </label>
+                                <label for="text" class="  text-left texte"id="abstract_article" > </label>
 
                             </div>
 
@@ -475,7 +475,7 @@
 
                             <div class="col-lg-10">
 
-
+                                <label for="text" class=" control-label text-left texte"id="keyword_article" > </label>
 
                             </div>
 
@@ -483,6 +483,56 @@
 
                     </div>
                         <legend></legend>
+
+
+                    <div id="co_auteur"></div>
+                    <legend></legend>
+                    <div class="row">
+                        <table class="table  table-striped table-condensed">
+
+                            <caption>
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th width="85%" class="text-center">MAIN FILE</th>
+                                <th width="5%" class="text-center">TYPE</th>
+                                <th width="10%" class="text-center">SIZE</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td id="f_title" class="text-center">----</td>
+                                <td id="f_type" class="text-center">----</td>
+                                <td id="f_taille" class="text-center">----</td>
+
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <legend></legend>
+                    <div class="row">
+                        <table class="table  table-striped table-condensed">
+
+                            <caption>
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th width="85%" class="text-center">IMAGES FILE</th>
+                                <th width="5%" class="text-center">TYPE</th>
+                                <th width="10%" class="text-center">SIZE</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="image_info">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
                     <button class="pull-left btn btn-primary" id="prev_3">Previous</button><button class="pull-right btn btn-success" id="next_4">&nbsp;Submit&nbsp;</button>
                 </div>
 
