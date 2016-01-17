@@ -3,7 +3,6 @@
  */
 $(document).ready(function() {
     var numimg=0;
-    $('#browse').hide();
     $('#add_images').hide();
     $('.table_image').hide();
     var nbco=1;
@@ -76,9 +75,15 @@ $(document).ready(function() {
         $('#abstract_article').text($('#abstract').val());
             $("#co_auteur").html('');
         for(var i=nbco;i>=1;i--) {
-            $("#co_auteur").after(" <div id=\"co_"+i+"\"> <div class=\"row\"><p class=\"text-center\">Co-auteur " + i + "</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_fn" + i + "\" > </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_mn" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ln" + i + "\" > </label> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_af" + i + "\" > </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ad" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">E-mail : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_add" + i + "\" > </label></div></div></div></div>");
+            $("#co_auteur").after(" <div id=\"co_"+i+"\"> <div class=\"row\"><p class=\"text-center\">Co-auteur " + i + "</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_fn"+i+"\"> </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_mn" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ln" + i + "\" > </label> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_af" + i + "\" > </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ad" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">E-mail : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_em" + i + "\" > </label></div></div></div></div>");
+            $("#cof_fn"+i+"").text($("#co_fn"+i+"").val());
+            $("#cof_mn"+i+"").text($("#co_mn"+i+"").val());
+            $("#cof_ln"+i+"").text($("#co_ln"+i+"").val());
+            $("#cof_af"+i+"").text($("#co_af"+i+"").val());
+            $("#cof_ad"+i+"").text($("#co_ad"+i+"").val());
+            $("#cof_em"+i+"").text($("#co_em"+i+"").val());
         }
-            file_title
+
             $('#f_title').text($('#file_title').html());
             $('#f_type').text($('#file_type').html());
             $('#f_taille').text($('#file_taille').html());
@@ -147,59 +152,65 @@ $(document).ready(function() {
 
         return resultat;
     }
-    $(document).on('change', '#main', function() {
-        var input = $(this);
-        var extensionsValides;
-        var file_t=$("#type_file").val();
-        if(file_t=="latex"){
-            extensionsValides=new Array('tex');
-        }else
-        {
-            if(file_t=="word") {
-                extensionsValides=new Array('doc','docx','avi');
-            }
-        }
-        var res=verifFileExtension('main',extensionsValides);
-        if (res){
-            $('#file_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
-            var fileInput=document.getElementById('main');
-            $("#file_taille").html((fileInput.files[0].size/1024/1024).toFixed(2)+' Mo');
-            $("#file_type").html($("#type_file").val());
-            var data= new FormData();
-            data.append('ajax','true');
-            data.append('file',fileInput.files[0]);
-            data.append('id',15);
-            var request= new XMLHttpRequest();
-            request.upload.addEventListener('progress',function(event) {
-                if (event.lengthComputable) {
-                    var percent = event.loaded / event.total;
-                    var progresse = Math.round(percent * 100);
-                    $('#main_progresse').width(progresse+'%');
-                    $('#main_progresse').html(progresse+'%');
-                    if(progresse==100) {
-                        $('#add_images').show();
-                    }
+    $(document).on('change', '#main', function()
+    if($('#type_file').val()==''){
+        $('#type_file').css("border-color","#ff0000");
+
+    }
+        else{
+            var input = $(this);
+            var extensionsValides;
+            var file_t=$("#type_file").val();
+            if(file_t=="latex"){
+                extensionsValides=new Array('tex');
+            }else
+            {
+                if(file_t=="word") {
+                    extensionsValides=new Array('doc','docx','avi');
                 }
+            }
+            var res=verifFileExtension('main',extensionsValides);
+            if (res){
+                $('#file_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
+                var fileInput=document.getElementById('main');
+                $("#file_taille").html((fileInput.files[0].size/1024/1024).toFixed(2)+' Mo');
+                $("#file_type").html($("#type_file").val());
+                var data= new FormData();
+                data.append('ajax','true');
+                data.append('file',fileInput.files[0]);
+                data.append('id',15);
+                var request= new XMLHttpRequest();
+                request.upload.addEventListener('progress',function(event) {
+                    if (event.lengthComputable) {
+                        var percent = event.loaded / event.total;
+                        var progresse = Math.round(percent * 100);
+                        $('#main_progresse').width(progresse+'%');
+                        $('#main_progresse').html(progresse+'%');
+                        if(progresse==100) {
+                            $('#add_images').show();
+                        }
+                    }
 
-            });
-            request.upload.addEventListener('load',function(event){
+                });
+                request.upload.addEventListener('load',function(event){
 
 
 
-            });
-            request.upload.addEventListener('error',function(event){
-                alert('upload fail');
-            });
-            request.open('POST','fichier.php');
-            request.setRequestHeader('Cache-control','no-cache');
-            request.send(data);
+                });
+                request.upload.addEventListener('error',function(event){
+                    alert('upload fail');
+                });
+                request.open('POST','fichier.php');
+                request.setRequestHeader('Cache-control','no-cache');
+                request.send(data);
 
-        }else
-        {
-            alert('type de fichier invalide');
+            }else
+            {
+                alert('type de fichier invalide');
+            }
+
+
         }
-
-
     });
     $(document).on('change', '#image', function() {
 

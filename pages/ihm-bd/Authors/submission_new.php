@@ -320,7 +320,7 @@
 
                         <div class="form-group">
 
-                            <label for="textarea" class="col-lg-2 control-label">Files Type : </label>
+                            <label for="textarea" class="col-lg-2 control-label">FILE TYPE: </label>
 
                             <div class="col-lg-6">
 
@@ -482,11 +482,11 @@
                         </div>
 
                     </div>
-                        <legend></legend>
+
 
 
                     <div id="co_auteur"></div>
-                    <legend></legend>
+
                     <div class="row">
                         <table class="table  table-striped table-condensed">
 
@@ -512,7 +512,7 @@
                         </table>
 
                     </div>
-                    <legend></legend>
+
                     <div class="row">
                         <table class="table  table-striped table-condensed">
 
