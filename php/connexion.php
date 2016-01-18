@@ -11,7 +11,7 @@ include_once("cnx.php");
 	   
 
     if ($inser->num_rows!=0) {
-      echo "1";
+
 	  session_start();
 	  $row = $inser->fetch_assoc();
 	  $_SESSION['id']=$row['id'];
@@ -20,6 +20,7 @@ include_once("cnx.php");
 	  $_SESSION['email']=$row['email'];
 	   $_SESSION['title']=$row['title'];
 	    $_SESSION['grade']=$row['grade'];
+        echo "1";
     }
     else
     {
