@@ -88,7 +88,7 @@
     <div class ="col-xs-9">
 
         <div id="contenu">
-            <form class="form-horizontal col-lg-12" enctype="multipart/form-data">
+            <form class="form-horizontal col-lg-12" enctype="multipart/form-data" id="form" method="post">
                 <div id="pi" class="partie">
 
 
@@ -228,7 +228,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="co_fn1" placeholder ="First Name ... ">
+                                <input type="text" class="form-control" id="co_fn1" placeholder ="First Name ... " name="co_fn1">
 
                             </div>
 
@@ -243,7 +243,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="co_mn1" placeholder ="Middle Name ... ">
+                                <input type="text" class="form-control" id="co_mn1" placeholder ="Middle Name ... " name="co_mn1">
 
                             </div>
 
@@ -258,7 +258,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="co_ln1" placeholder ="Last Name ... ">
+                                <input type="text" class="form-control" id="co_ln1" placeholder ="Last Name ... " name="co_ln1">
 
                             </div>
 
@@ -273,7 +273,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="text" class="form-control" id="co_af1" placeholder ="Affiliation ... ">
+                                <input type="text" class="form-control" id="co_af1" placeholder ="Affiliation ... " name="co_af1">
 
                             </div>
 
@@ -288,7 +288,7 @@
 
                             <div class="col-lg-8">
 
-                                <textarea  class="form-control" id="co_ad1" placeholder ="Adresse ... " rows="3"></textarea>
+                                <textarea  class="form-control" id="co_ad1" placeholder ="Adresse ... " rows="3" name="co_ad1"></textarea>
 
                             </div>
 
@@ -303,7 +303,7 @@
 
                             <div class="col-lg-8">
 
-                                <input type="email" class="form-control" id="co_em1" placeholder ="Email ... ">
+                                <input type="email" class="form-control" id="co_em1" placeholder ="Email ... " name="co_em1">
 
                             </div>
 
@@ -324,7 +324,7 @@
 
                             <div class="col-lg-6">
 
-                                <select name="type_of_paper"  id="type_file" class="form-control" >
+                                <select  id="type_file" class="form-control" >
                                     <option value="" selected="selected" >-- Please Select --</option>
                                     <option value="word">Word</option>
                                     <option value="latex">Latex</option>
@@ -335,7 +335,7 @@
                             </div>
                             <div class="col-lg-1 add">
                                     <span class="btn btn-default btn-file" id="browse">
-                                         Browse... <input type="file" id="main">
+                                         Browse... <input type="file" id="main" name="main">
                                     </span>
                             </div>
 

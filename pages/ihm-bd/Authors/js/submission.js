@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('#add').click(function(e){
         nbco=nbco+1;
 
-        $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_fn"+nbco+"\" placeholder =\"First Name ... \" name=\"fname_co"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_mn"+nbco+"\" placeholder =\"Middle Name ... \"name=\"mname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_ln"+nbco+"\" placeholder =\"last Name ... \" name=\"lname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_af"+nbco+"\" placeholder =\"affiliation ... \"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"co_ad"+nbco+"\" placeholder =\"Middle Name ... \" rows=\"3\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_em"+nbco+"\" placeholder =\"Email ... \"></div></div></div>");
+        $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_fn"+nbco+"\" placeholder =\"First Name ... \" name=\"fname_co"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_mn"+nbco+"\" placeholder =\"Middle Name ... \"name=\"mname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_ln"+nbco+"\" placeholder =\"last Name ... \" name=\"lname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_af"+nbco+"\" placeholder =\"affiliation ... \" name=\"co_af"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"co_ad"+nbco+"\" placeholder =\"Middle Name ... \" rows=\"3\" name=\"co_ad"+nbco+"\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_em"+nbco+"\" placeholder =\"Email ... \" name=\"co_em"+nbco+"\"></div></div></div>");
         $('#co'+nbco).after("<span id=\"co"+(nbco+1)+"\"></span>");
         if(nbco!=0){ $('#remove').prop('disabled', false);}
         return false;
@@ -95,6 +95,19 @@ $(document).ready(function() {
         return false;}
 
     );
+    $("#next_4").click(function(e) {
+        e.stopPropagation();
+        data=$('#form').serialize();
+        var main_file=$("#file_title").html();
+        data=data+"&main_file="+main_file;
+        for(var i=1;i<=numimg;i++)
+        {
+          data=data+"&image"+i+"="+$("#image_title"+i+"").html()  ;
+        }
+        console.log(data);
+
+        return false;
+    });
     $("#prev_1").click(function(){
         current_div = $(this).parent();
         previous_div = $(this).parent().prev();
@@ -152,7 +165,7 @@ $(document).ready(function() {
 
         return resultat;
     }
-    $(document).on('change', '#main', function()
+    $(document).on('change', '#main', function(){
     if($('#type_file').val()==''){
         $('#type_file').css("border-color","#ff0000");
 
@@ -222,7 +235,7 @@ $(document).ready(function() {
 
         if (res){
             $(".table_image").show();
-            $(".table_image tbody").append(" <tr><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td><div class=\"progress bar\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"70\"aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\" id=\"img_progresse"+(numimg+1)+"\">0%</div></div></td><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
+            $(".table_image tbody").append("<tr><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td><div class=\"progress bar\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"70\"aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\" id=\"img_progresse"+(numimg+1)+"\">0%</div></div></td><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
             $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
             $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
             $("#img_type").html(getExtension(input.val()).toUpperCase());
