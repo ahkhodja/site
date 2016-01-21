@@ -325,7 +325,6 @@
                             <div class="col-lg-6">
 
                                 <select  id="type_file" class="form-control" >
-                                    <option value="" selected="selected" >-- Please Select --</option>
                                     <option value="word">Word</option>
                                     <option value="latex">Latex</option>
 

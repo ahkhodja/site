@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('#add').click(function(e){
         nbco=nbco+1;
 
-        $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_fn"+nbco+"\" placeholder =\"First Name ... \" name=\"fname_co"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_mn"+nbco+"\" placeholder =\"Middle Name ... \"name=\"mname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_ln"+nbco+"\" placeholder =\"last Name ... \" name=\"lname_co"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_af"+nbco+"\" placeholder =\"affiliation ... \" name=\"co_af"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"co_ad"+nbco+"\" placeholder =\"Middle Name ... \" rows=\"3\" name=\"co_ad"+nbco+"\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_em"+nbco+"\" placeholder =\"Email ... \" name=\"co_em"+nbco+"\"></div></div></div>");
+        $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_fn"+nbco+"\" placeholder =\"First Name ... \" name=\"co_fn"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_mn"+nbco+"\" placeholder =\"Middle Name ... \"name=\"co_mn"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_ln"+nbco+"\" placeholder =\"last Name ... \" name=\"co_ln"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_af"+nbco+"\" placeholder =\"affiliation ... \" name=\"co_af"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"co_ad"+nbco+"\" placeholder =\"Middle Name ... \" rows=\"3\" name=\"co_ad"+nbco+"\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_em"+nbco+"\" placeholder =\"Email ... \" name=\"co_em"+nbco+"\"></div></div></div>");
         $('#co'+nbco).after("<span id=\"co"+(nbco+1)+"\"></span>");
         if(nbco!=0){ $('#remove').prop('disabled', false);}
         return false;
@@ -87,6 +87,7 @@ $(document).ready(function() {
             $('#f_title').text($('#file_title').html());
             $('#f_type').text($('#file_type').html());
             $('#f_taille').text($('#file_taille').html());
+            $("#image_info tr").remove();
             for(var i=1;i<=numimg;i++)
             {
                 $("#image_info").append("<tr><td id=\"i_title"+i+"\" class=\"text-center\">"+$("#image_title"+i+"").html()+"</td><td id=\"i_type"+i+"\" class=\"text-center\">"+$("#image_extension"+i+"").html()+"</td><td id=\"i_taille"+i+"\" class=\"text-center\">"+$("#image_size"+i+"").html()+"</td></tr>");
@@ -97,14 +98,35 @@ $(document).ready(function() {
     );
     $("#next_4").click(function(e) {
         e.stopPropagation();
-        data=$('#form').serialize();
+        var data_sub=$('#form').serialize();
         var main_file=$("#file_title").html();
-        data=data+"&main_file="+main_file;
+        data_sub=data_sub+"&main_file="+main_file;
         for(var i=1;i<=numimg;i++)
         {
-          data=data+"&image"+i+"="+$("#image_title"+i+"").html()  ;
+            data_sub=data_sub+"&image"+i+"="+$("#image_title"+i+"").html()  ;
         }
-        console.log(data);
+        data_sub=data_sub+"&nb_co="+nbco;
+        data_sub=data_sub+"&nb_im="+numimg;
+        console.log(data_sub);
+        $.ajax({
+            type:"POST",
+            url:"php/submit_article.php",
+            data: data_sub,async:false,
+            success:function(data)
+            {
+                if(data == 1)
+                {
+                    alert("ok");
+                }
+                else
+                {
+
+
+                }
+            }
+
+
+        });
 
         return false;
     });
@@ -137,15 +159,7 @@ $(document).ready(function() {
         return false;
 
     });
-    $('#type_file').change(function() {
-        if($('#type_file').val()==''){
-            $('#browse').hide();
-        }else
-        {
-            $('#browse').show();
-        }
 
-    });
     function getExtension(filename)
     {
         var parts = filename.split(".");
@@ -166,11 +180,9 @@ $(document).ready(function() {
         return resultat;
     }
     $(document).on('change', '#main', function(){
-    if($('#type_file').val()==''){
-        $('#type_file').css("border-color","#ff0000");
 
-    }
-        else{
+
+
             var input = $(this);
             var extensionsValides;
             var file_t=$("#type_file").val();
@@ -223,7 +235,7 @@ $(document).ready(function() {
             }
 
 
-        }
+
     });
     $(document).on('change', '#image', function() {
 
