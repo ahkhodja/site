@@ -224,6 +224,8 @@ $(document).ready(function() {
                 });
                 request.upload.addEventListener('error',function(event){
                     alert('upload fail');
+
+                    //supprimer l'image du tableau et decrementé le compteur
                 });
                 request.open('POST','fichier.php');
                 request.setRequestHeader('Cache-control','no-cache');
@@ -300,6 +302,7 @@ $(document).ready(function() {
             request.upload.addEventListener('error',function(event){
                 alert('upload fail');
                 $(".block tr:nth-child("+(numimg+1)+")").remove();
+
             });
             request.open('POST','fichier.php');
             request.setRequestHeader('Cache-control','no-cache');
