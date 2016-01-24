@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: URTI
@@ -51,11 +52,21 @@ if (file_exists($filename)) {
 
                 $inserfile = $conn->query("INSERT INTO file (name, url,article,type) VALUES ('".$mainfile."','',".$idarticle.",'file_source')");
 
+                $inserfile=$conn->query("INSERT INTO file (name, url,article,type) VALUES ('".$filename."','',".$idarticle.",'AJAM-D')");
+                $ajam_d=mysqli_insert_id($conn);
+
+                $inserfile=$conn->query("INSERT INTO state_author (article, file,date,state) VALUES ('".$idarticle."','".$ajam_d."',now(),'validation')");
+
                     for($j=1;$j<=$nb_im;$j++){
 
                         $inserimage = $conn->query("INSERT INTO file (name, url,article,type) VALUES ('".mysqli_real_escape_string($conn,$_POST['image'.$j])."','',".$idarticle.",'image_source')");
 
                     }
+                     //mail
+
+
+
+
 
             }else{
 

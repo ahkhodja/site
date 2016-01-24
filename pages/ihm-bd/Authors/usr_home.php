@@ -142,7 +142,7 @@ if ($select->num_rows!=0) {
 
                 <td>". $row['date']."</td>
                 <td>". $row['state']."</td>
-            </tr>
+        </tr>
   ";
 	
 	

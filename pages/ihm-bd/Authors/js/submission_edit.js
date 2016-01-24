@@ -1,7 +1,12 @@
 /**
+ * Created by URTI on 24/01/2016.
+ */
+/**
  * Created by URTI on 20/12/2015.
  */
 $(document).ready(function() {
+    $("#area option[value='"+$("#area_edit").val()+"']").prop('selected', true);
+    $("#type").find("option[value='"+$("#type_edit").val()+"']").prop('selected', true);
     var numimg=0;
     $('#add_images').hide();
     $('.table_image').hide();
@@ -58,31 +63,31 @@ $(document).ready(function() {
 
     });
     $("#next_3").click(function(e) {
-        e.stopPropagation();
-        current_div = $(this).parent();
-        next_div = $(this).parent().next();
-        next_div.show();
-        current_div.hide();
-        $(".etape_progresse a").eq($(".partie").index(current_div)).removeClass("encours");
-        $(".etape_progresse a i").eq($(".partie").index(current_div)).removeClass("fa fa-pencil fa-1x pull-right");
-        $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
-        $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
-        $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
+            e.stopPropagation();
+            current_div = $(this).parent();
+            next_div = $(this).parent().next();
+            next_div.show();
+            current_div.hide();
+            $(".etape_progresse a").eq($(".partie").index(current_div)).removeClass("encours");
+            $(".etape_progresse a i").eq($(".partie").index(current_div)).removeClass("fa fa-pencil fa-1x pull-right");
+            $(".etape_progresse a i").eq($(".partie").index(current_div)).addClass("fa  fa-check fa-1x pull-right");
+            $(".etape_progresse a").eq($(".partie").index(next_div)).addClass("encours");
+            $(".etape_progresse a i").eq($(".partie").index(next_div)).addClass("fa  fa-pencil fa-1x pull-right");
 
-        $('#titre').text($('#title').val());
-        $('#type_article').text($('#type').val());
-        $('#area_article').text($('#area').val());
-        $('#abstract_article').text($('#abstract').val());
+            $('#titre').text($('#title').val());
+            $('#type_article').text($('#type').val());
+            $('#area_article').text($('#area').val());
+            $('#abstract_article').text($('#abstract').val());
             $("#co_auteur").html('');
-        for(var i=nbco;i>=1;i--) {
-            $("#co_auteur").after(" <div id=\"co_"+i+"\"> <div class=\"row\"><p class=\"text-center\">Co-auteur " + i + "</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_fn"+i+"\"> </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_mn" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ln" + i + "\" > </label> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_af" + i + "\" > </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ad" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">E-mail : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_em" + i + "\" > </label></div></div></div></div>");
-            $("#cof_fn"+i+"").text($("#co_fn"+i+"").val());
-            $("#cof_mn"+i+"").text($("#co_mn"+i+"").val());
-            $("#cof_ln"+i+"").text($("#co_ln"+i+"").val());
-            $("#cof_af"+i+"").text($("#co_af"+i+"").val());
-            $("#cof_ad"+i+"").text($("#co_ad"+i+"").val());
-            $("#cof_em"+i+"").text($("#co_em"+i+"").val());
-        }
+            for(var i=nbco;i>=1;i--) {
+                $("#co_auteur").after(" <div id=\"co_"+i+"\"> <div class=\"row\"><p class=\"text-center\">Co-auteur " + i + "</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_fn"+i+"\"> </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_mn" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ln" + i + "\" > </label> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_af" + i + "\" > </label></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_ad" + i + "\" > </label></div> </div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">E-mail : </label><div class=\"col-lg-8\"><label for=\"text\" class=\" control-label text-left texte\"id=\"cof_em" + i + "\" > </label></div></div></div></div>");
+                $("#cof_fn"+i+"").text($("#co_fn"+i+"").val());
+                $("#cof_mn"+i+"").text($("#co_mn"+i+"").val());
+                $("#cof_ln"+i+"").text($("#co_ln"+i+"").val());
+                $("#cof_af"+i+"").text($("#co_af"+i+"").val());
+                $("#cof_ad"+i+"").text($("#co_ad"+i+"").val());
+                $("#cof_em"+i+"").text($("#co_em"+i+"").val());
+            }
 
             $('#f_title').text($('#file_title').html());
             $('#f_type').text($('#file_type').html());
@@ -93,7 +98,7 @@ $(document).ready(function() {
                 $("#image_info").append("<tr><td id=\"i_title"+i+"\" class=\"text-center\">"+$("#image_title"+i+"").html()+"</td><td id=\"i_type"+i+"\" class=\"text-center\">"+$("#image_extension"+i+"").html()+"</td><td id=\"i_taille"+i+"\" class=\"text-center\">"+$("#image_size"+i+"").html()+"</td></tr>");
             }
 
-        return false;}
+            return false;}
 
     );
     $("#next_4").click(function(e) {
@@ -183,56 +188,56 @@ $(document).ready(function() {
 
 
 
-            var input = $(this);
-            var extensionsValides;
-            var file_t=$("#type_file").val();
-            if(file_t=="latex"){
-                extensionsValides=new Array('tex');
-            }else
-            {
-                if(file_t=="word") {
-                    extensionsValides=new Array('doc','docx','avi');
-                }
+        var input = $(this);
+        var extensionsValides;
+        var file_t=$("#type_file").val();
+        if(file_t=="latex"){
+            extensionsValides=new Array('tex');
+        }else
+        {
+            if(file_t=="word") {
+                extensionsValides=new Array('doc','docx','avi');
             }
-            var res=verifFileExtension('main',extensionsValides);
-            if (res){
-                $('#file_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
-                var fileInput=document.getElementById('main');
-                $("#file_taille").html((fileInput.files[0].size/1024/1024).toFixed(2)+' Mo');
-                $("#file_type").html($("#type_file").val());
-                var data= new FormData();
-                data.append('ajax','true');
-                data.append('file',fileInput.files[0]);
-                data.append('id',15);
-                var request= new XMLHttpRequest();
-                request.upload.addEventListener('progress',function(event) {
-                    if (event.lengthComputable) {
-                        var percent = event.loaded / event.total;
-                        var progresse = Math.round(percent * 100);
-                        $('#main_progresse').width(progresse+'%');
-                        $('#main_progresse').html(progresse+'%');
-                        if(progresse==100) {
-                            $('#add_images').show();
-                        }
+        }
+        var res=verifFileExtension('main',extensionsValides);
+        if (res){
+            $('#file_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
+            var fileInput=document.getElementById('main');
+            $("#file_taille").html((fileInput.files[0].size/1024/1024).toFixed(2)+' Mo');
+            $("#file_type").html($("#type_file").val());
+            var data= new FormData();
+            data.append('ajax','true');
+            data.append('file',fileInput.files[0]);
+            data.append('id',15);
+            var request= new XMLHttpRequest();
+            request.upload.addEventListener('progress',function(event) {
+                if (event.lengthComputable) {
+                    var percent = event.loaded / event.total;
+                    var progresse = Math.round(percent * 100);
+                    $('#main_progresse').width(progresse+'%');
+                    $('#main_progresse').html(progresse+'%');
+                    if(progresse==100) {
+                        $('#add_images').show();
                     }
+                }
 
-                });
-                request.upload.addEventListener('load',function(event){
+            });
+            request.upload.addEventListener('load',function(event){
 
 
 
-                });
-                request.upload.addEventListener('error',function(event){
-                    alert('upload fail');
-                });
-                request.open('POST','fichier.php');
-                request.setRequestHeader('Cache-control','no-cache');
-                request.send(data);
+            });
+            request.upload.addEventListener('error',function(event){
+                alert('upload fail');
+            });
+            request.open('POST','fichier.php');
+            request.setRequestHeader('Cache-control','no-cache');
+            request.send(data);
 
-            }else
-            {
-                alert('type de fichier invalide');
-            }
+        }else
+        {
+            alert('type de fichier invalide');
+        }
 
 
 
@@ -253,24 +258,24 @@ $(document).ready(function() {
             $("#img_type").html(getExtension(input.val()).toUpperCase());
 
 
-             var data= new FormData();
-             data.append('ajax','true');
-             data.append('file',imgInput.files[0]);
-             data.append('id',15);
-             var request= new XMLHttpRequest();
-             request.upload.addEventListener('progress',function(event) {
-             if (event.lengthComputable) {
-             var percent = event.loaded / event.total;
-             var progresse = Math.round(percent * 100);
-             $('#img_progresse'+(numimg+1)).width(progresse+'%');
-             $('#img_progresse'+(numimg+1)).html(progresse+'%');
-             }
+            var data= new FormData();
+            data.append('ajax','true');
+            data.append('file',imgInput.files[0]);
+            data.append('id',15);
+            var request= new XMLHttpRequest();
+            request.upload.addEventListener('progress',function(event) {
+                if (event.lengthComputable) {
+                    var percent = event.loaded / event.total;
+                    var progresse = Math.round(percent * 100);
+                    $('#img_progresse'+(numimg+1)).width(progresse+'%');
+                    $('#img_progresse'+(numimg+1)).html(progresse+'%');
+                }
                 if(progresse==100){
                     numimg=numimg+1;
 
                 }
-                 console.log("finiupload"+numimg);
-             });
+                console.log("finiupload"+numimg);
+            });
             request.upload.addEventListener('load',function(event){
                 console.log('ok');
                 $(".delete_im").on('click',function(){
@@ -306,9 +311,9 @@ $(document).ready(function() {
             request.send(data);
 
         }else
-    {
-        alert('type de fichier invalide');
-    }
+        {
+            alert('type de fichier invalide');
+        }
     });
     $("#delete").click(function(){
         $('#file_title').html('------');
