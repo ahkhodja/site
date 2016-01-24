@@ -50,9 +50,10 @@ if (file_exists($filename)) {
             if($inser){
 
                 $inserfile = $conn->query("INSERT INTO file (name, url,article,type) VALUES ('".$mainfile."','',".$idarticle.",'file_source')");
+
                     for($j=1;$j<=$nb_im;$j++){
 
-                        $inserfile = $conn->query("INSERT INTO file (name, url,article,type) VALUES ('".$mainfile."','',".$idarticle.",'file_source')");
+                        $inserimage = $conn->query("INSERT INTO file (name, url,article,type) VALUES ('".mysqli_real_escape_string($conn,$_POST['image'.$j])."','',".$idarticle.",'image_source')");
 
                     }
 
