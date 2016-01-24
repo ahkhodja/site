@@ -83,7 +83,7 @@ $select = $conn->query("SELECT id,title,type,area,state, DATE_FORMAT(date, '%d %
             			<i class ="fa   fa-search fa-2x "></i>&nbsp; Track Paper
              		 
             		</a>
-                     <a href="submission.php" target="_blank" class="list-group-item">
+                     <a href="submission_new.php" target="_blank" class="list-group-item">
             			<i class ="fa    fa-upload fa-2x "></i>&nbsp; &nbsp;Submit
              		 
             		</a>
@@ -124,12 +124,11 @@ if ($select->num_rows!=0) {
 <table id=\"table\" class=\"table table-striped table-bordered\" cellspacing=\"0\" width=\"100%\">
  <thead>
             <tr>
-                <th>ID</th>
-                <th>TITLE</th>
-                <th>TYPE</th>
-                <th>AREA</th>
-                <th>DATE</th>
-                <th>STATU</th>
+                <th width='10%'>ID</th>
+                <th width='70%'>TITLE</th>
+
+                <th width='10%'>DATE</th>
+                <th width='10%' >STATU</th>
             </tr>
         </thead>
 		<tbody>
@@ -140,8 +139,7 @@ if ($select->num_rows!=0) {
 	   <tr>
                 <td>". $row['id']."</td>
                 <td><a href=\"#\" class=\"lien\">". $row['title']."</a></td>
-                <td>". $row['type']."</td>
-                <td>". $row['area']."</td>
+
                 <td>". $row['date']."</td>
                 <td>". $row['state']."</td>
             </tr>
@@ -383,7 +381,7 @@ $("#edit").click(function(){
 });
 $('ul li a').click(
 
-			function(e) {
+			function() {
 				
 				 // stop the click from bubbling
 				$(this).closest('ul').find('.active').removeClass('active');
