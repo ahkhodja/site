@@ -96,7 +96,7 @@ var handleUpload=function(event){
 	
 	event.preventDefault();
 	event.stopPropagation();
-	extensionsValides=new Array('pdf','avi');
+	extensionsValides=new Array('tex','doc','docx');
 	
 	
 	var fileInput=document.getElementById('file');
