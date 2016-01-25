@@ -31,6 +31,8 @@ if (file_exists($filename)) {
     $abstract=mysqli_real_escape_string($conn,$_POST['abstract']);
     $keywords=mysqli_real_escape_string($conn,$_POST['keyword']);
     $mainfile=mysqli_real_escape_string($conn,$_POST["main_file"]);
+    $main_type=mysqli_real_escape_string($conn,$_POST["ext_file"]);
+    $main_size=mysqli_real_escape_string($conn,$_POST["size_file"]);
     $nb_im=intval(mysqli_real_escape_string($conn,$_POST["nb_im"]));
 
     $inser = $conn->query("INSERT INTO article (author, title, type, area, abstract, keywords, fichierZip, date,state,clé) VALUES ('".$idauthor."','".$title."','".$type."','".$area."','".$abstract."','".$keywords."','".$filename."',now(),'validation','".$clé."')");
@@ -50,16 +52,16 @@ if (file_exists($filename)) {
             $inser = $conn->query("INSERT INTO co_author (fname, mname, lname, affiliation,adresse,email,article) VALUES ('".$fname."','".$mname."','".$lname."','".$affiliation."','".$address1."','".$email."',".$idarticle.")");}
             if($inser){
 
-                $inserfile = $conn->query("INSERT INTO file (name, url,article,type) VALUES ('".$mainfile."','',".$idarticle.",'file_source')");
+                $inserfile = $conn->query("INSERT INTO file (name, size,article,type,extension) VALUES ('".$mainfile."','".$main_size."',".$idarticle.",'file_source','".$main_type."')");
 
-                $inserfile=$conn->query("INSERT INTO file (name, url,article,type) VALUES ('".$filename."','',".$idarticle.",'AJAM-D')");
+                $inserfile=$conn->query("INSERT INTO file (name, size,article,type) VALUES ('".$filename."','',".$idarticle.",'AJAM-D')");
                 $ajam_d=mysqli_insert_id($conn);
 
                 $inserfile=$conn->query("INSERT INTO state_author (article, file,date,state) VALUES ('".$idarticle."','".$ajam_d."',now(),'validation')");
 
                     for($j=1;$j<=$nb_im;$j++){
 
-                        $inserimage = $conn->query("INSERT INTO file (name, url,article,type) VALUES ('".mysqli_real_escape_string($conn,$_POST['image'.$j])."','',".$idarticle.",'image_source')");
+                        $inserimage = $conn->query("INSERT INTO file (name, size,article,type) VALUES ('".mysqli_real_escape_string($conn,$_POST['image'.$j])."','',".$idarticle.",'image_source')");
 
                     }
                      //mail

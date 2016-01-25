@@ -376,11 +376,16 @@ $row = $select->fetch_assoc();
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            $file=$conn->query("SELECT name,extension,size  FROM file WHERE article=13 and type='file_source'");
+                            $file_row=$file->fetch_assoc()
+                            ?>
                             <tr>
-                                <td id="file_title" class="text-center">----</td>
-                                <td id="file_type" class="text-center">----</td>
-                                <td id="file_taille" class="text-center">----</td>
-                                <td>
+                                <td id="file_title" class="text-center"><?php echo $file_row['name'] ?></td>
+                                <td id="file_type" class="text-center"><?php echo $file_row['extension'] ?></td>
+                                <td id="file_taille" class="text-center"><?php echo $file_row['size'] ?></td>
+                                <td id="progresse_file">
+
                                     <div class="progress bar">
                                         <div class="progress-bar" role="progressbar" aria-valuenow="70"
                                              aria-valuemin="0" aria-valuemax="100" style="width:0%" id="main_progresse">

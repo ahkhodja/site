@@ -100,7 +100,12 @@ $(document).ready(function() {
         e.stopPropagation();
         var data_sub=$('#form').serialize();
         var main_file=$("#file_title").html();
+        var size_file=$("#file_taille").html();
+        var ext_file=$("#file_type").html();
         data_sub=data_sub+"&main_file="+main_file;
+        data_sub=data_sub+"&size_file="+size_file;
+        data_sub=data_sub+"&ext_file="+ext_file;
+
         for(var i=1;i<=numimg;i++)
         {
             data_sub=data_sub+"&image"+i+"="+$("#image_title"+i+"").html()  ;

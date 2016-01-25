@@ -10,7 +10,7 @@ $(document).ready(function() {
     var numimg=0;
     $('#add_images').hide();
     $('.table_image').hide();
-    var nbco=$("#co_numm").val();
+    var nbco=parseInt($("#co_numm").val());
     console.log(nbco);
     $("#next_1").click(function(e) {
         e.stopPropagation();
@@ -28,7 +28,9 @@ $(document).ready(function() {
 
     });
     $('#add').click(function(e){
+        alert($("#co_numm").val());
         nbco=nbco+1;
+        alert("#co"+nbco);
 
         $('#co'+nbco).append("<div class=\"row\"><p class=\"text-center\">Co-auteur "+nbco+"</p> </div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label> <div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_fn"+nbco+"\" placeholder =\"First Name ... \" name=\"co_fn"+nbco+"\"> </div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_mn"+nbco+"\" placeholder =\"Middle Name ... \"name=\"co_mn"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_ln"+nbco+"\" placeholder =\"last Name ... \" name=\"co_ln"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_af"+nbco+"\" placeholder =\"affiliation ... \" name=\"co_af"+nbco+"\"></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Adresse: </label><div class=\"col-lg-8\"><textarea  class=\"form-control\" id=\"co_ad"+nbco+"\" placeholder =\"Middle Name ... \" rows=\"3\" name=\"co_ad"+nbco+"\"></textarea></div></div></div><div class=\"row\"><div class=\"form-group\"><label for=\"text\" class=\"col-lg-2 control-label\">Email : </label><div class=\"col-lg-8\"><input type=\"text\" class=\"form-control\" id=\"co_em"+nbco+"\" placeholder =\"Email ... \" name=\"co_em"+nbco+"\"></div></div></div>");
         $('#co'+nbco).after("<span id=\"co"+(nbco+1)+"\"></span>");
