@@ -8,6 +8,8 @@
 include_once("php/cnx.php");
 $select = $conn->query("SELECT title,type,area,abstract,keywords  FROM article WHERE id=13");
 $row = $select->fetch_assoc();
+
+
 ?>
 
 <!doctype html>
@@ -221,99 +223,114 @@ $row = $select->fetch_assoc();
 
                     <legend> ABOUT CO-AUTEUR </legend>
                     <div class="row" id="debut"><button class="col-lg-pull-5 btn btn-success" id="add">&nbsp;&nbsp;Add co-auteur&nbsp;&nbsp;</button><button class="btn btn-danger " id="remove">&nbsp;&nbsp;remove co-auteur&nbsp;&nbsp;</button></div>
-                    <span id="co1">
-                        <div class="row"><p class="text-center">Co-auteur 1</p> </div>
-                    <div class="row">
 
-                        <div class="form-group">
 
-                            <label for="text" class="col-lg-2 control-label">First Name : </label>
+                         <?php
+                         $co=$conn->query("SELECT fname,mname,lname,affiliation,adresse,email  FROM co_author WHERE article=13");
+                         if ($co->num_rows!=0) {
+                            $i=0;
+                         while($co_row = $co->fetch_assoc()){
+                             $i++;
+                             echo"
+                             <span id=\"co".$i."\">
+                        <div class=\"row\"><p class=\"text-center\">Co-auteur ".$i."</p> </div>
+                    <div class=\"row\">
 
-                            <div class="col-lg-8">
+                        <div class=\"form-group\">
 
-                                <input type="text" class="form-control" id="co_fn1" placeholder ="First Name ... " name="co_fn1">
+                            <label for=\"text\" class=\"col-lg-2 control-label\">First Name : </label>
 
-                            </div>
+                            <div class=\"col-lg-8\">
 
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                        <div class="form-group">
-
-                            <label for="text" class="col-lg-2 control-label">Middle Name : </label>
-
-                            <div class="col-lg-8">
-
-                                <input type="text" class="form-control" id="co_mn1" placeholder ="Middle Name ... " name="co_mn1">
+                                <input type=\"text\" class=\"form-control\" id=\"co_fn".$i."\" placeholder =\"First Name ... \" name=\"co_fn1\" value=\" ".$co_row['fname']."\">
 
                             </div>
 
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class=\"row\">
 
-                        <div class="form-group">
+                        <div class=\"form-group\">
 
-                            <label for="text" class="col-lg-2 control-label">Last Name : </label>
+                            <label for=\"text\" class=\"col-lg-2 control-label\">Middle Name : </label>
 
-                            <div class="col-lg-8">
+                            <div class=\"col-lg-8\">
 
-                                <input type="text" class="form-control" id="co_ln1" placeholder ="Last Name ... " name="co_ln1">
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                        <div class="form-group">
-
-                            <label for="text" class="col-lg-2 control-label">Affiliation : </label>
-
-                            <div class="col-lg-8">
-
-                                <input type="text" class="form-control" id="co_af1" placeholder ="Affiliation ... " name="co_af1">
+                                <input type=\"text\" class=\"form-control\" id=\"co_mn1\" placeholder =\"Middle Name ... \" name=\"co_mn1\" value=\" ".$co_row['mname']."\">
 
                             </div>
 
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class=\"row\">
 
-                        <div class="form-group">
+                        <div class=\"form-group\">
 
-                            <label for="text" class="col-lg-2 control-label">Adresse : </label>
+                            <label for=\"text\" class=\"col-lg-2 control-label\">Last Name : </label>
 
-                            <div class="col-lg-8">
+                            <div class=\"col-lg-8\">
 
-                                <textarea  class="form-control" id="co_ad1" placeholder ="Adresse ... " rows="3" name="co_ad1"></textarea>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                        <div class="form-group">
-
-                            <label for="text" class="col-lg-2 control-label">E-mail : </label>
-
-                            <div class="col-lg-8">
-
-                                <input type="email" class="form-control" id="co_em1" placeholder ="Email ... " name="co_em1">
+                                <input type=\"text\" class=\"form-control\" id=\"co_ln1\" placeholder =\"Last Name ... \" name=\"co_ln1\" value=\" ".$co_row['lname']."\">
 
                             </div>
 
                         </div>
 
                     </div>
-                        </span><span id="co2"></span>
+                    <div class=\"row\">
+
+                        <div class=\"form-group\">
+
+                            <label for=\"text\" class=\"col-lg-2 control-label\">Affiliation : </label>
+
+                            <div class=\"col-lg-8\">
+
+                                <input type=\"text\" class=\"form-control\" id=\"co_af1\" placeholder =\"Affiliation ... \" name=\"co_af1\" value=\" ".$co_row['affiliation']."\">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class=\"row\">
+
+                        <div class=\"form-group\">
+
+                            <label for=\"text\" class=\"col-lg-2 control-label\">Adresse : </label>
+
+                            <div class=\"col-lg-8\">
+
+                                <textarea  class=\"form-control\" id=\"co_ad1\" placeholder =\"Adresse ... \" rows=\"3\" name=\"co_ad1\">".$co_row['adresse']."</textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class=\"row\">
+
+                        <div class=\"form-group\">
+
+                            <label for=\"text\" class=\"col-lg-2 control-label\">E-mail : </label>
+
+                            <div class=\"col-lg-8\">
+
+                                <input type=\"email\" class=\"form-control\" id=\"co_em1\" placeholder =\"Email ... \" name=\"co_em1\" value=\" ".$co_row['email']."\">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                        </span>";
+
+                         }
+                            echo "<span id=\"co".($i+1)."\"></span>
+                            <input type=\"hidden\" id=\"co_numm\" value=\"".$i."\">";
+                         }
+                         ?>
 
                     <button class="pull-left btn btn-primary" id="prev_1">Previous</button><button class="pull-right btn btn-primary" id="next_2">&nbsp;Next&nbsp;</button>
                 </div>

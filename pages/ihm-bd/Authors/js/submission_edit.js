@@ -10,7 +10,8 @@ $(document).ready(function() {
     var numimg=0;
     $('#add_images').hide();
     $('.table_image').hide();
-    var nbco=1;
+    var nbco=$("#co_numm").val();
+    console.log(nbco);
     $("#next_1").click(function(e) {
         e.stopPropagation();
         current_div = $(this).parent();
