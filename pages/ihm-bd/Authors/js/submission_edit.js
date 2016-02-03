@@ -95,11 +95,10 @@ $(document).ready(function() {
             $('#f_title').text($('#file_title').html());
             $('#f_type').text($('#file_type').html());
             $('#f_taille').text($('#file_taille').html());
-            $("#image_info tr").remove();
-            for(var i=1;i<=numimg;i++)
-            {
-                $("#image_info").append("<tr><td id=\"i_title"+i+"\" class=\"text-center\">"+$("#image_title"+i+"").html()+"</td><td id=\"i_type"+i+"\" class=\"text-center\">"+$("#image_extension"+i+"").html()+"</td><td id=\"i_taille"+i+"\" class=\"text-center\">"+$("#image_size"+i+"").html()+"</td></tr>");
-            }
+            $("#image_info #image_upl tr").remove();
+        $( "#image_upl" ).clone().appendTo( "#image_info" );
+
+        $("#image_info #image_upl tr .action").remove();
 
             return false;}
 

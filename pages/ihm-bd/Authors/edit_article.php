@@ -377,7 +377,7 @@ $row = $select->fetch_assoc();
                             </thead>
                             <tbody>
                             <?php
-                            $file=$conn->query("SELECT name,extension,size  FROM file WHERE article=13 and type='file_source'");
+                            $file=$conn->query("SELECT name,extension,size  FROM file WHERE article=14 and type='file_source'");
                             $file_row=$file->fetch_assoc()
                             ?>
                             <tr>
@@ -399,6 +399,49 @@ $row = $select->fetch_assoc();
 
                         </table>
 
+                    </div>
+                    <div class="row">
+                        <?php
+                        $image=$conn->query("SELECT name,extension,size  FROM file WHERE article=14 and type='image_source'");
+
+
+                        ?>
+
+                        <table class="table  table-striped table-condensed ">
+
+                            <caption>
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th width="65%" class="text-center">IMAGES</th>
+                                <th width="5%" class="text-center">TYPE</th>
+                                <th width="10%" class="text-center">SIZE</th>
+                                <th width="5%" class="text-center">ACTION</th>
+                            </tr>
+                            </thead>
+                            <tbody id="image_upl">
+
+                                <?php
+                                while($image_row=$image->fetch_assoc())
+                                {
+                                    // on affiche les informations de l'enregistrement en cours
+                                    echo"<tr>
+
+                                <td class=\"text-center\">".$image_row['name']."</td>
+                                <td class=\"text-center\">".$image_row['extension']."</td>
+                                <td class=\"text-center\">".$image_row['size']."</td>
+                                <td class=\"action\"><button type=\"button\" class=\"btn btn-danger btn_smal\" id=\"delete\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td>
+
+                                        </tr>
+                                    ";
+                                }
+
+
+                                ?>
+
+                            </tbody>
+
+                        </table>
                     </div>
                     <div class="row">
                         <span class="btn btn-default btn-file" id="add_images">
@@ -538,7 +581,7 @@ $row = $select->fetch_assoc();
                     </div>
 
                     <div class="row">
-                        <table class="table  table-striped table-condensed">
+                        <table id="image_info" class="table  table-striped table-condensed">
 
                             <caption>
                             </caption>
@@ -550,9 +593,7 @@ $row = $select->fetch_assoc();
 
                             </tr>
                             </thead>
-                            <tbody id="image_info">
 
-                            </tbody>
 
                         </table>
 

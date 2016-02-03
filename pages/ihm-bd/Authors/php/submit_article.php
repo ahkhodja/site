@@ -9,7 +9,7 @@
 $nb_co=intval($_POST["nb_co"]) ;
  $mainfile=$_POST["main_file"];
 $output = array();
-$path='C:\Program Files (x86)\EasyPHP-DevServer-14.1VC11\data\localweb\site\pages\ihm-bd\Authors\files\15\temp';
+$path='C:\Program Files (x86)\EasyPHP-Devserver-16.1\eds-www\site\pages\ihm-bd\Authors\files\15\temp';
 chdir($path);
 $outputt=exec("xelatex  ".$mainfile,$output);
 print_r ($output);
@@ -19,12 +19,12 @@ $filename=$filedec[0].".pdf";
 
 if (file_exists($filename)) {
     echo "Le fichier $filename existe.";
-    chdir('C:\Program Files (x86)\EasyPHP-DevServer-14.1VC11\data\localweb\site\pages\ihm-bd\Authors\php');
+    chdir('C:\Program Files (x86)\EasyPHP-Devserver-16.1\eds-www\site\pages\ihm-bd\Authors\php');
     //insertion article
     include_once("../../../../php/cnx.php");
 
     $idauthor=15;
-    $clé = md5(uniqid(rand(), true));
+    $cle = md5(uniqid(rand(), true));
     $title=mysqli_real_escape_string($conn,$_POST['title']);
     $type=mysqli_real_escape_string($conn,$_POST['type']);
     $area=mysqli_real_escape_string($conn,$_POST['area']);
@@ -35,7 +35,7 @@ if (file_exists($filename)) {
     $main_size=mysqli_real_escape_string($conn,$_POST["size_file"]);
     $nb_im=intval(mysqli_real_escape_string($conn,$_POST["nb_im"]));
 
-    $inser = $conn->query("INSERT INTO article (author, title, type, area, abstract, keywords, fichierZip, date,state,clé) VALUES ('".$idauthor."','".$title."','".$type."','".$area."','".$abstract."','".$keywords."','".$filename."',now(),'validation','".$clé."')");
+    $inser = $conn->query("INSERT INTO article (author, title, type, area, abstract, keywords, fichierZip, date,state,cle) VALUES ('".$idauthor."','".$title."','".$type."','".$area."','".$abstract."','".$keywords."','".$filename."',now(),'validation','".$cle."')");
 
 
 
