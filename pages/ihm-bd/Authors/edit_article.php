@@ -358,6 +358,7 @@ $row = $select->fetch_assoc();
                                     </span>
                             </div>
 
+
                         </div>
 
                     </div>
@@ -430,7 +431,7 @@ $row = $select->fetch_assoc();
                                 <td class=\"text-center\">".$image_row['name']."</td>
                                 <td class=\"text-center\">".$image_row['extension']."</td>
                                 <td class=\"text-center\">".$image_row['size']."</td>
-                                <td class=\"action\"><button type=\"button\" class=\"btn btn-danger btn_smal\" id=\"delete\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td>
+                                <td class=\"action\"><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td>
 
                                         </tr>
                                     ";
