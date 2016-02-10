@@ -5,6 +5,7 @@
  * Created by URTI on 20/12/2015.
  */
 $(document).ready(function() {
+
     $("#area option[value='"+$("#area_edit").val()+"']").prop('selected', true);
     $("#type").find("option[value='"+$("#type_edit").val()+"']").prop('selected', true);
     var numimg=0;
@@ -323,6 +324,39 @@ $(document).ready(function() {
         $("#file_type").html('------');
         $('#main_progresse').width('0%');
         $('#main_progresse').html('0%');
+    });
+    $(".delete_im").on('click',function(){
+        var courant=$(this).parent();
+        var index = $("#image_upl tr").index(courant.parent());
+        var file=$("#image_upl tr:nth-child("+(index+1)+") td:nth-child(1)").text();
+
+        var ida=$('#ida').val();
+        $.ajax({
+            type:"POST",
+            url:"php/unlink.php",
+            data: 'file=' + file+'&ida='+ida+'',async:false,
+            success:function(data)
+            {
+                if(data == 1)
+                {alert();
+                    $("#image_upl tr:nth-child("+(index+1)+")").hide("slow", function(){ $(this).remove(); });
+
+                }
+                else
+                {
+
+
+                }
+            }
+
+
+        });
+
+
+        $(".image_upl tr:nth-child("+(index+1)+")").remove();
+        numimg=$(".image_upl tr").length;
+
+
     });
 
 
