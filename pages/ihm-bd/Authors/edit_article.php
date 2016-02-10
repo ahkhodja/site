@@ -6,7 +6,8 @@
  * Time: 13:07
  */
 include_once("php/cnx.php");
-$select = $conn->query("SELECT title,type,area,abstract,keywords  FROM article WHERE id=13");
+$id_article=18;
+$select = $conn->query("SELECT id,title,type,area,abstract,keywords  FROM article WHERE id=".$id_article);//changer en clé
 $row = $select->fetch_assoc();
 
 
@@ -122,6 +123,7 @@ $row = $select->fetch_assoc();
 
                     <div class="row">
                         <?php echo"<input type='hidden' id='type_edit' value='".$row['type']."'>";?>
+                        <?php echo"<input type='hidden' id='ida' value='".$row['id']."'>";?>
                         <div class="form-group">
 
                             <label for="textarea" class="col-lg-2 control-label">Article Type : </label>
@@ -226,7 +228,7 @@ $row = $select->fetch_assoc();
 
 
                          <?php
-                         $co=$conn->query("SELECT fname,mname,lname,affiliation,adresse,email  FROM co_author WHERE article=13");
+                         $co=$conn->query("SELECT fname,mname,lname,affiliation,adresse,email  FROM co_author WHERE article=".$id_article);
                          if ($co->num_rows!=0) {
                             $i=0;
                          while($co_row = $co->fetch_assoc()){
@@ -378,7 +380,7 @@ $row = $select->fetch_assoc();
                             </thead>
                             <tbody>
                             <?php
-                            $file=$conn->query("SELECT name,extension,size  FROM file WHERE article=14 and type='file_source'");
+                            $file=$conn->query("SELECT name,extension,size  FROM file WHERE article=".$id_article." and type='file_source'");
                             $file_row=$file->fetch_assoc()
                             ?>
                             <tr>
@@ -403,7 +405,7 @@ $row = $select->fetch_assoc();
                     </div>
                     <div class="row">
                         <?php
-                        $image=$conn->query("SELECT name,extension,size  FROM file WHERE article=14 and type='image_source'");
+                        $image=$conn->query("SELECT name,extension,size  FROM file WHERE article=".$id_article." and type='image_source'");
 
 
                         ?>
