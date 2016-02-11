@@ -9,10 +9,9 @@ $(document).ready(function() {
     $("#area option[value='"+$("#area_edit").val()+"']").prop('selected', true);
     $("#type").find("option[value='"+$("#type_edit").val()+"']").prop('selected', true);
     var numimg=0;
-    $('#add_images').hide();
-    $('.table_image').hide();
     var nbco=parseInt($("#co_numm").val());
     console.log(nbco);
+    $('#image_progresse').hide();
     $("#next_1").click(function(e) {
         e.stopPropagation();
         current_div = $(this).parent();
@@ -254,11 +253,6 @@ $(document).ready(function() {
         var res=verifFileExtension('image',extensionsValides);
 
         if (res){
-            $(".table_image").show();
-            $(".table_image tbody").append("<tr><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td><div class=\"progress bar\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"70\"aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\" id=\"img_progresse"+(numimg+1)+"\">0%</div></div></td><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
-            $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
-            $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
-            $("#img_type").html(getExtension(input.val()).toUpperCase());
 
 
             var data= new FormData();
@@ -268,13 +262,25 @@ $(document).ready(function() {
             var request= new XMLHttpRequest();
             request.upload.addEventListener('progress',function(event) {
                 if (event.lengthComputable) {
+                    $(".progress ").show();
                     var percent = event.loaded / event.total;
                     var progresse = Math.round(percent * 100);
-                    $('#img_progresse'+(numimg+1)).width(progresse+'%');
-                    $('#img_progresse'+(numimg+1)).html(progresse+'%');
+
+                    $('#image_progresse').width(progresse+'%');
+                    $('#image_progresse').html(progresse+'%');
                 }
                 if(progresse==100){
                     numimg=numimg+1;
+                    $(".table_image tbody").append("<tr><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td>><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
+                    $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
+                    $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
+                    $("#img_type").html(getExtension(input.val()).toUpperCase());
+
+                    $('#image_progresse').show("slow");
+                    $(".progress ").hide(2000, function(){
+                        $('#image_progresse').width('0%');
+                        $('#image_progresse').html('0%');  });
+
 
                 }
                 console.log("finiupload"+numimg);
@@ -338,7 +344,7 @@ $(document).ready(function() {
             success:function(data)
             {
                 if(data == 1)
-                {alert();
+                {
                     $("#image_upl tr:nth-child("+(index+1)+")").hide("slow", function(){ $(this).remove(); });
 
                 }

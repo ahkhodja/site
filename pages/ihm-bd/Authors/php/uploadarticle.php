@@ -46,7 +46,7 @@ $inser = $conn->query("INSERT INTO co_author (fname, mname, lname, affiliation,a
 if($inser){
 	
 	
-	  require '../PHPMailer/PHPMailerAutoload.php';
+require '../PHPMailer/PHPMailerAutoload.php';
  $mail= new PHPMailer();
 
  

@@ -12,13 +12,14 @@ $output = array();
 $path='C:\Program Files (x86)\EasyPHP-Devserver-16.1\eds-www\site\pages\ihm-bd\Authors\files\15\temp';
 chdir($path);
 $outputt=exec("xelatex  ".$mainfile,$output);
-print_r ($output);
+//print_r ($output);
 $filedec =  explode('.', $mainfile );
 
 $filename=$filedec[0].".pdf";
 
+
 if (file_exists($filename)) {
-    echo "Le fichier $filename existe.";
+
     chdir('C:\Program Files (x86)\EasyPHP-Devserver-16.1\eds-www\site\pages\ihm-bd\Authors\php');
     //insertion article
     include_once("../../../../php/cnx.php");
@@ -41,6 +42,7 @@ if (file_exists($filename)) {
 
     if($inser){
         $idarticle=mysqli_insert_id($conn);
+        mkdir("../files/".$idauthor."/".$idarticle."/source",0777,true);
         for($i=1;$i<=$nb_co;$i++){
             $fname=mysqli_real_escape_string($conn,$_POST["co_fn".$i]);
             $mname=mysqli_real_escape_string($conn,$_POST['co_ln'.$i]);
@@ -53,17 +55,21 @@ if (file_exists($filename)) {
             if($inser){
 
                 $inserfile = $conn->query("INSERT INTO file (name, size,article,type,extension) VALUES ('".$mainfile."','".$main_size."',".$idarticle.",'file_source','".$main_type."')");
+                    rename("../files/".$idauthor."/temp/".$mainfile."","../files/".$idauthor."/".$idarticle."/source/".$mainfile."");
 
                 $inserfile=$conn->query("INSERT INTO file (name, size,article,type) VALUES ('".$filename."','',".$idarticle.",'AJAM-D')");
+                rename("../files/".$idauthor."/temp/".$filename."","../files/".$idauthor."/".$idarticle."/ajam_D_".$idarticle.".pdf");
                 $ajam_d=mysqli_insert_id($conn);
 
                 $inserfile=$conn->query("INSERT INTO state_author (article, file,date,state) VALUES ('".$idarticle."','".$ajam_d."',now(),'validation')");
 
                     for($j=1;$j<=$nb_im;$j++){
 
+                        rename("../files/".$idauthor."/temp/".mysqli_real_escape_string($conn,$_POST['image'.$j])."","../files/".$idauthor."/".$idarticle."/source/".mysqli_real_escape_string($conn,$_POST['image'.$j])."");
                         $inserimage = $conn->query("INSERT INTO file (name, size,article,type) VALUES ('".mysqli_real_escape_string($conn,$_POST['image'.$j])."','',".$idarticle.",'image_source')");
 
                     }
+                echo "1";
                      //mail
 
 
@@ -82,7 +88,7 @@ if (file_exists($filename)) {
 } else {
 
 
-    echo "Le fichier $filename n'existe pas.";
+    echo "0";
 }
 
 /**if (isset($_POST["title"])){

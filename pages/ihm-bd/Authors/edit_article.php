@@ -6,7 +6,7 @@
  * Time: 13:07
  */
 include_once("php/cnx.php");
-$id_article=18;
+$id_article=25;
 $select = $conn->query("SELECT id,title,type,area,abstract,keywords  FROM article WHERE id=".$id_article);//changer en clé
 $row = $select->fetch_assoc();
 
@@ -21,7 +21,7 @@ $row = $select->fetch_assoc();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.css" type="text/css" />
-    <link rel="stylesheet" href="css/submission.css" type="text/css" />
+    <link rel="stylesheet" href="css/submissionedit.css" type="text/css" />
     <link href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/cssboot.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, intial-scale=1.0">
@@ -409,8 +409,22 @@ $row = $select->fetch_assoc();
 
 
                         ?>
+                        <div class="row">
+                            <div class="col-xs-2">
+                                 <span class="btn btn-default btn-file" id="add_images">
+                                         ADD FIGURES <input type="file" id="image">
+                                    </span>
+                                </div>
 
-                        <table class="table  table-striped table-condensed ">
+                                <div class="progress bar">
+                                    <div id="image_progresse"  class="progress-bar" style="width:0% ;height: 30px" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar">
+                                        0%
+                                    </div>
+                                </div>
+
+
+                        </div>
+                        <table class="table  table-striped table-condensed table_image ">
 
                             <caption>
                             </caption>
@@ -446,29 +460,7 @@ $row = $select->fetch_assoc();
 
                         </table>
                     </div>
-                    <div class="row">
-                        <span class="btn btn-default btn-file" id="add_images">
-                                         ADD FIGURES <input type="file" id="image">
-                                    </span>
-                        <table class="table  table-striped table-condensed table_image">
 
-                            <caption>
-                            </caption>
-                            <thead>
-                            <tr>
-                                <th width="65%" class="text-center">IMAGES</th>
-                                <th width="5%" class="text-center">TYPE</th>
-                                <th width="10%" class="text-center">SIZE</th>
-                                <th width="15%" class="text-center">PROGRESSION</th>
-                                <th width="5%" class="text-center">ACTION</th>
-                            </tr>
-                            </thead>
-                            <tbody class="block">
-
-                            </tbody>
-
-                        </table>
-                    </div>
 
                     <button class="pull-left btn btn-primary" id="prev_2">Previous</button><button class="pull-right btn btn-primary" id="next_3">&nbsp;Next&nbsp;</button>
 
