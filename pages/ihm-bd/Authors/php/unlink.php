@@ -13,11 +13,10 @@ $idar=$_POST['ida'];
 
 
 
-include_once("../../../../php/cnx.php");
-$sql="DELETE FROM `file` WHERE (`article`=".$idar.") AND (`name`='".$file."')";
 
-if ($conn->query($sql) === TRUE) {
-    unlink('../files/'.$id.'/'.$idar.'/source/'.$file);
+
+if (unlink('../files/'.$id.'/'.$idar.'/source/temp/'.$file)) {
+
     echo "1";
 } else {
     echo "0";

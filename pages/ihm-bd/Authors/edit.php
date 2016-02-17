@@ -7,10 +7,26 @@
  */
 include_once("php/cnx.php");
 $id_article=27;
-$select = $conn->query("SELECT id,title,type,area,abstract,keywords  FROM article WHERE id=".$id_article);//changer en clé
+$cle;
+$id_author=15;
+$select = $conn->query("SELECT id,title,type,area,abstract,keywords,state  FROM article WHERE id=".$id_article);//changer en clé
 $row = $select->fetch_assoc();
+if ($row['state']=="validation") {
+    if ($handle = opendir('files/' . $id_author . '/' . $id_article . '/source/temp/')) {
 
 
+        /* Ceci est la façon correcte de traverser un dossier. */
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "ajax-loader.gif" && $entry != "." && $entry != "..") {
+
+                unlink("files/" . $id_author . "/" . $id_article . "/source/temp/" . $entry);;
+
+            }
+
+        }
+        closedir($handle);
+    }
+}else{   header('Location: usr_home.php');   }
 ?>
 
 <!doctype html>
@@ -147,7 +163,7 @@ $row = $select->fetch_assoc();
                     </div>
 
                     <div class="row">
-                          <?php echo"<input type='hidden' id='area_edit' value='".$row['area']."'>";?>
+                        <?php echo"<input type='hidden' id='area_edit' value='".$row['area']."'>";?>
                         <div class="form-group">
                             <label for="select" class="col-lg-2 control-label">Areas of Article : </label>
                             <div class="col-lg-10">
@@ -227,13 +243,13 @@ $row = $select->fetch_assoc();
                     <div class="row" id="debut"><button class="col-lg-pull-5 btn btn-success" id="add">&nbsp;&nbsp;Add co-auteur&nbsp;&nbsp;</button><button class="btn btn-danger " id="remove">&nbsp;&nbsp;remove co-auteur&nbsp;&nbsp;</button></div>
 
 
-                         <?php
-                         $co=$conn->query("SELECT fname,mname,lname,affiliation,adresse,email  FROM co_author WHERE article=".$id_article);
-                         if ($co->num_rows!=0) {
-                            $i=0;
-                         while($co_row = $co->fetch_assoc()){
-                             $i++;
-                             echo"
+                    <?php
+                    $co=$conn->query("SELECT fname,mname,lname,affiliation,adresse,email  FROM co_author WHERE article=".$id_article);
+                    if ($co->num_rows!=0) {
+                        $i=0;
+                        while($co_row = $co->fetch_assoc()){
+                            $i++;
+                            echo"
                              <span id=\"co".$i."\">
                         <div class=\"row\"><p class=\"text-center\">Co-auteur ".$i."</p> </div>
                     <div class=\"row\">
@@ -328,11 +344,11 @@ $row = $select->fetch_assoc();
                     </div>
                         </span>";
 
-                         }
-                            echo "<span id=\"co".($i+1)."\"></span>
+                        }
+                        echo "<span id=\"co".($i+1)."\"></span>
                             <input type=\"hidden\" id=\"co_numm\" value=\"".$i."\">";
-                         }
-                         ?>
+                    }
+                    ?>
 
                     <button class="pull-left btn btn-primary" id="prev_1">Previous</button><button class="pull-right btn btn-primary" id="next_2">&nbsp;Next&nbsp;</button>
                 </div>
@@ -360,7 +376,6 @@ $row = $select->fetch_assoc();
                                     </span>
                             </div>
 
-
                         </div>
 
                     </div>
@@ -379,52 +394,30 @@ $row = $select->fetch_assoc();
                             </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $file=$conn->query("SELECT name,extension,size  FROM file WHERE article=".$id_article." and type='file_source'");
-                                $file_row=$file->fetch_assoc()
-                                ?>
-                                <tr>
-                                    <td id="file_title" class="text-center"><?php echo $file_row['name'] ?></td>
-                                    <td id="file_type" class="text-center"><?php echo $file_row['extension'] ?></td>
-                                    <td id="file_taille" class="text-center"><?php echo $file_row['size'] ?></td>
-                                    <td id="progresse_file">
-
-                                        <div class="progress bar">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                                 aria-valuemin="0" aria-valuemax="100" style="width:0%" id="main_progresse">
-                                                0%
-                                            </div>
+                            <tr>
+                                <td id="file_title" class="text-center">----</td>
+                                <td id="file_type" class="text-center">----</td>
+                                <td id="file_taille" class="text-center">----</td>
+                                <td>
+                                    <div class="progress bar">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                             aria-valuemin="0" aria-valuemax="100" style="width:0%" id="main_progresse">
+                                            0%
                                         </div>
-                                    </td>
-                                    <td><button type="button" class="btn btn-danger btn_smal" id="delete"><i class ="fa fa-trash-o fa-1x "></i></button></td>
-                                </tr>
+                                    </div>
+                                </td>
+                                <td><button type="button" class="btn btn-danger btn_smal" id="delete"><i class ="fa fa-trash-o fa-1x "></i></button></td>
+                            </tr>
                             </tbody>
 
                         </table>
 
                     </div>
                     <div class="row">
-                        <?php
-                        $image=$conn->query("SELECT name,extension,size  FROM file WHERE article=".$id_article." and type='image_source'");
-
-
-                        ?>
-                        <div class="row">
-                            <div class="col-xs-2">
-                                 <span class="btn btn-default btn-file" id="add_images">
+                        <span class="btn btn-default btn-file" id="add_images">
                                          ADD FIGURES <input type="file" id="image">
                                     </span>
-                                </div>
-
-                                <div class="progress bar">
-                                    <div id="image_progresse"  class="progress-bar" style="width:0% ;height: 30px" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar">
-                                        0%
-                                    </div>
-                                </div>
-
-
-                        </div>
-                        <table class="table  table-striped table-condensed table_image ">
+                        <table class="table  table-striped table-condensed table_image">
 
                             <caption>
                             </caption>
@@ -436,30 +429,12 @@ $row = $select->fetch_assoc();
                                 <th width="5%" class="text-center">ACTION</th>
                             </tr>
                             </thead>
-                            <tbody id="image_upl">
-
-                                <?php
-                                while($image_row=$image->fetch_assoc())
-                                {
-                                    // on affiche les informations de l'enregistrement en cours
-                                    echo"<tr class='old'>
-                                <td class=\"text-center \">".$image_row['name']."</td>
-                                <td class=\"text-center \">".$image_row['extension']."</td>
-                                <td class=\"text-center \">".$image_row['size']."</td>
-                                <td class=\"action\"><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td>
-
-                                        </tr>
-                                    ";
-                                }
-
-
-                                ?>
+                            <tbody class="block">
 
                             </tbody>
 
                         </table>
                     </div>
-
 
                     <button class="pull-left btn btn-primary" id="prev_2">Previous</button><button class="pull-right btn btn-primary" id="next_3">&nbsp;Next&nbsp;</button>
 
@@ -575,7 +550,7 @@ $row = $select->fetch_assoc();
                     </div>
 
                     <div class="row">
-                        <table id="image_info" class="table  table-striped table-condensed">
+                        <table class="table  table-striped table-condensed">
 
                             <caption>
                             </caption>
@@ -587,7 +562,9 @@ $row = $select->fetch_assoc();
 
                             </tr>
                             </thead>
+                            <tbody id="image_info">
 
+                            </tbody>
 
                         </table>
 
@@ -611,6 +588,6 @@ $row = $select->fetch_assoc();
 </div>
 
 <!--suppress JSJQueryEfficiency -->
-<script type="text/javascript" src="js/submission_edit.js"></script>
+<script type="text/javascript" src="js/edit.js"></script>
 </body>
 </html>

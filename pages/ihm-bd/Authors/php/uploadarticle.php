@@ -47,7 +47,7 @@ if($inser){
 	
 	
 require '../PHPMailer/PHPMailerAutoload.php';
- $mail= new PHPMailer();
+    $mail= new PHPMailer();
 
  
 

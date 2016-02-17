@@ -5,7 +5,7 @@
  * Created by URTI on 20/12/2015.
  */
 $(document).ready(function() {
-
+    var ida=$('#ida').val();
     $("#area option[value='"+$("#area_edit").val()+"']").prop('selected', true);
     $("#type").find("option[value='"+$("#type_edit").val()+"']").prop('selected', true);
     var numimg=0;
@@ -253,71 +253,88 @@ $(document).ready(function() {
         var res=verifFileExtension('image',extensionsValides);
 
         if (res){
+            $.ajax({
+                type:"POST",
+                url:"php/existe.php",
+                data: 'file=' +input.val().replace(/\\/g, '/').replace(/.*\//, '')+'&ida='+ida+'',async:false,
+                success:function(data)
+                {
+                    if(data == 1)
+                    {
+                        alert("le fichier existe deja")
+                    }
+                    else
+                    {
+                        var data= new FormData();
+                        data.append('ajax','true');
+                        data.append('file',imgInput.files[0]);
+                        data.append('idarticle',ida);
+                        var request= new XMLHttpRequest();
+                        request.upload.addEventListener('progress',function(event) {
+                            if (event.lengthComputable) {
+                                $(".progress ").show();
+                                var percent = event.loaded / event.total;
+                                var progresse = Math.round(percent * 100);
+
+                                $('#image_progresse').width(progresse+'%');
+                                $('#image_progresse').html(progresse+'%');
+                            }
+                            if(progresse==100){
+
+                                $(".table_image tbody").append("<tr class='new'><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td class='action'><button type=\"button\" class=\"btn btn-danger btn_smal delete_im_o\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
+                                $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
+                                $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
+                                $("#img_type").html(getExtension(input.val()).toUpperCase());
+                                $('#image_progresse').show("slow");
+                                $(".progress ").fadeOut(2000, function(){
+                                    $('#image_progresse').width('0%');
+                                    $('#image_progresse').html('0%');  });
+                                numimg=numimg+1;
+
+                            }
+                            console.log("finiupload"+numimg);
+                        });
+                        request.upload.addEventListener('load',function(event){
+                            $(".delete_im_o").on('click',function(){
+                                var courant=$(this).parent();
+                                var index = $("#image_upl tr").index(courant.parent());
+                                console.log(index);
+                                var old=$("#image_upl .old").length;
+                                var num_totale=$("#image_upl tr").length;
+
+                                var val=((index+2)-old)-1;
+                                console.log("index"+(index+2));
+                                console.log("old"+(old-1));
+                                console.log("val"+val);
+                                for(var j=(index+2);j<=num_totale;j++){
+
+                                    $("#image_upl tr:nth-child("+j+") td:nth-child(1)").attr('id',"image_title"+val+"");
+                                    $("#image_upl tr:nth-child("+j+") td:nth-child(2)").attr('id',"image_extension"+val+"");
+                                    $("#image_upl tr:nth-child("+j+") td:nth-child(3)").attr('id',"image_size"+val+"");
+                                    val++;
+                                }
+                                $("#image_upl tr:nth-child("+(index+1)+")").fadeOut("slow",function(){$(this).remove();numimg=$("#image_upl .new").length;console.log("nbimage:"+numimg);});
 
 
-            var data= new FormData();
-            data.append('ajax','true');
-            data.append('file',imgInput.files[0]);
-            data.append('id',15);
-            var request= new XMLHttpRequest();
-            request.upload.addEventListener('progress',function(event) {
-                if (event.lengthComputable) {
-                    $(".progress ").show();
-                    var percent = event.loaded / event.total;
-                    var progresse = Math.round(percent * 100);
-
-                    $('#image_progresse').width(progresse+'%');
-                    $('#image_progresse').html(progresse+'%');
-                }
-                if(progresse==100){
-                    numimg=numimg+1;
-                    $(".table_image tbody").append("<tr><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td>><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
-                    $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
-                    $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
-                    $("#img_type").html(getExtension(input.val()).toUpperCase());
-
-                    $('#image_progresse').show("slow");
-                    $(".progress ").hide(2000, function(){
-                        $('#image_progresse').width('0%');
-                        $('#image_progresse').html('0%');  });
+                            });
 
 
-                }
-                console.log("finiupload"+numimg);
-            });
-            request.upload.addEventListener('load',function(event){
-                console.log('ok');
-                $(".delete_im").on('click',function(){
-                    var courant=$(this).parent();
-                    var index = $(".block tr").index(courant.parent());
-
-
-
-
-                    for(var j=(index+2);j<=numimg;j++){
-
-                        $(".block tr:nth-child("+j+") td:nth-child(1)").attr('id',"image_title"+(j)+"");
-                        $(".block tr:nth-child("+j+") td:nth-child(2)").attr('id',"image_extension"+(j)+"");
-                        $(".block tr:nth-child("+j+") td:nth-child(3)").attr('id',"image_size"+(j)+"");
-                        $(".block tr:nth-child("+j+") td:nth-child(4) div div"  ).attr('id',"img_progresse"+(j)+"");
+                        });
+                        request.upload.addEventListener('error',function(event){
+                            alert('upload fail');
+                            $(".block tr:nth-child("+(numimg+1)+")").remove();
+                        });
+                        request.open('POST','php/fichier_edit.php');
+                        request.setRequestHeader('Cache-control','no-cache');
+                        request.send(data);
 
                     }
-
-                    $(".block tr:nth-child("+(index+1)+")").remove();
-                    numimg=$(".block tr").length;
-                    console.log(numimg);
-
-                });
+                }
 
 
             });
-            request.upload.addEventListener('error',function(event){
-                alert('upload fail');
-                $(".block tr:nth-child("+(numimg+1)+")").remove();
-            });
-            request.open('POST','fichier.php');
-            request.setRequestHeader('Cache-control','no-cache');
-            request.send(data);
+
+
 
         }else
         {
@@ -336,7 +353,7 @@ $(document).ready(function() {
         var index = $("#image_upl tr").index(courant.parent());
         var file=$("#image_upl tr:nth-child("+(index+1)+") td:nth-child(1)").text();
 
-        var ida=$('#ida').val();
+
         $.ajax({
             type:"POST",
             url:"php/unlink.php",
@@ -346,7 +363,6 @@ $(document).ready(function() {
                 if(data == 1)
                 {
                     $("#image_upl tr:nth-child("+(index+1)+")").hide("slow", function(){ $(this).remove(); });
-
                 }
                 else
                 {

@@ -7,7 +7,7 @@
  * Time: 10:15
  */
 $nb_co=intval($_POST["nb_co"]) ;
- $mainfile=$_POST["main_file"];
+$mainfile=$_POST["main_file"];
 $output = array();
 $path='C:\Program Files (x86)\EasyPHP-Devserver-16.1\eds-www\site\pages\ihm-bd\Authors\files\15\temp';
 chdir($path);
@@ -16,11 +16,8 @@ $outputt=exec("xelatex  ".$mainfile,$output);
 $filedec =  explode('.', $mainfile );
 
 $filename=$filedec[0].".pdf";
-
-
 if (file_exists($filename)) {
-
-    chdir('C:\Program Files (x86)\EasyPHP-Devserver-16.1\eds-www\site\pages\ihm-bd\Authors\php');
+     chdir('C:\Program Files (x86)\EasyPHP-Devserver-16.1\eds-www\site\pages\ihm-bd\Authors\php');
     //insertion article
     include_once("../../../../php/cnx.php");
 
@@ -66,7 +63,7 @@ if (file_exists($filename)) {
                     for($j=1;$j<=$nb_im;$j++){
 
                         rename("../files/".$idauthor."/temp/".mysqli_real_escape_string($conn,$_POST['image'.$j])."","../files/".$idauthor."/".$idarticle."/source/".mysqli_real_escape_string($conn,$_POST['image'.$j])."");
-                        $inserimage = $conn->query("INSERT INTO file (name, size,article,type) VALUES ('".mysqli_real_escape_string($conn,$_POST['image'.$j])."','',".$idarticle.",'image_source')");
+                        $inserimage = $conn->query("INSERT INTO file (name, size,article,type,extension) VALUES ('".mysqli_real_escape_string($conn,$_POST['image'.$j])."','".mysqli_real_escape_string($conn,$_POST['images'.$j])."',".$idarticle.",'image_source','".mysqli_real_escape_string($conn,$_POST['imagee'.$j])."')");
 
                     }
                 echo "1";

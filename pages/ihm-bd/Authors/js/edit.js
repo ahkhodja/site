@@ -2,10 +2,15 @@
  * Created by URTI on 20/12/2015.
  */
 $(document).ready(function() {
+    var ida=$('#ida').val();
+    //var etat=$('#etat').val();
+    var etat=18;
+    $("#area option[value='"+$("#area_edit").val()+"']").prop('selected', true);
+    $("#type").find("option[value='"+$("#type_edit").val()+"']").prop('selected', true);
     var numimg=0;
     $('#add_images').hide();
     $('.table_image').hide();
-    var nbco=1;
+    var nbco=1;//changer
     $("#next_1").click(function(e) {
         e.stopPropagation();
         current_div = $(this).parent();
@@ -88,6 +93,7 @@ $(document).ready(function() {
             $('#f_type').text($('#file_type').html());
             $('#f_taille').text($('#file_taille').html());
             $("#image_info tr").remove();
+
             for(var i=1;i<=numimg;i++)
             {
                 $("#image_info").append("<tr><td id=\"i_title"+i+"\" class=\"text-center\">"+$("#image_title"+i+"").html()+"</td><td id=\"i_type"+i+"\" class=\"text-center\">"+$("#image_extension"+i+"").html()+"</td><td id=\"i_taille"+i+"\" class=\"text-center\">"+$("#image_size"+i+"").html()+"</td></tr>");
@@ -114,10 +120,12 @@ $(document).ready(function() {
         }
         data_sub=data_sub+"&nb_co="+nbco;
         data_sub=data_sub+"&nb_im="+numimg;
+        data_sub=data_sub+"&id_article="+ida;
+        data_sub=data_sub+"&etat="+etat;
         console.log(data_sub);
         $.ajax({
             type:"POST",
-            url:"php/submit_article.php",
+            url:"php/validate_edit.php",
             data: data_sub,async:false,
             success:function(data)
             {
@@ -210,7 +218,7 @@ $(document).ready(function() {
                 var data= new FormData();
                 data.append('ajax','true');
                 data.append('file',fileInput.files[0]);
-                data.append('id',15);
+                data.append('idarticle',ida);
                 var request= new XMLHttpRequest();
                 request.upload.addEventListener('progress',function(event) {
                     if (event.lengthComputable) {
@@ -232,9 +240,9 @@ $(document).ready(function() {
                 request.upload.addEventListener('error',function(event){
                     alert('upload fail');
 
-                    //supprimer l'image du tableau et decrement� le compteur
+
                 });
-                request.open('POST','fichier.php');
+                request.open('POST','php/fichier_edit.php');
                 request.setRequestHeader('Cache-control','no-cache');
                 request.send(data);
 
@@ -255,70 +263,120 @@ $(document).ready(function() {
         var res=verifFileExtension('image',extensionsValides);
 
         if (res){
-            $(".table_image").show();
-            $(".table_image tbody").append("<tr><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td><div class=\"progress bar\"><div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"70\"aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width:0%\" id=\"img_progresse"+(numimg+1)+"\">0%</div></div></td><td><button type=\"button\" class=\"btn btn-danger btn_smal delete_im\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
-            $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
-            $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
-            $("#img_type").html(getExtension(input.val()).toUpperCase());
+            $.ajax({
+                type:"POST",
+                url:"php/existe.php",
+                data: 'file=' +input.val().replace(/\\/g, '/').replace(/.*\//, '')+'&ida='+ida+'',async:false,
+                success:function(data)
+                {
+                    if(data == 1)
+                    {
+                        alert("le fichier existe deja")
+                    }
+                    else
+                    {
+
+                        var data= new FormData();
+
+                        data.append('ajax','true');
+                        data.append('file',imgInput.files[0]);
+                        data.append('idarticle',ida);
+                        var request= new XMLHttpRequest();
+                        request.upload.addEventListener('progress',function(event) {
+                            if (event.lengthComputable) {
+                                $(".progress ").show();
+                                var percent = event.loaded / event.total;
+                                var progresse = Math.round(percent * 100);
+
+                                $('#image_progresse').width(progresse+'%');
+                                $('#image_progresse').html(progresse+'%');
+                            }
+                            if(progresse==100){
+                                $(".table_image").show();
+
+                                $(".table_image tbody").append("<tr class='new'><td  class=\"text-center\" id=\"image_title"+(numimg+1)+"\">"+input.val().replace(/\\/g, '/').replace(/.*\//, '')+"</td><td class=\"text-center\"id=\"image_extension"+(numimg+1)+"\">"+getExtension(input.val()).toUpperCase()+"</td><td class=\"text-center\"id=\"image_size"+(numimg+1)+"\">"+(imgInput.files[0].size/1024).toFixed(2)+' ko'+"</td><td class='action'><button type=\"button\" class=\"btn btn-danger btn_smal delete_im_o\" id=\"delete_im\"><i class =\"fa fa-trash-o fa-1x \"></i></button></td></tr>");
+                                $('#img_title').html(input.val().replace(/\\/g, '/').replace(/.*\//, '')) ;
+                                $("#img_taille").html((imgInput.files[0].size/1024).toFixed(2)+' ko');
+                                $("#img_type").html(getExtension(input.val()).toUpperCase());
+                                $('#image_progresse').show("slow");
+                                $(".progress ").fadeOut(2000, function(){
+                                    $('#image_progresse').width('0%');
+                                    $('#image_progresse').html('0%');  });
+                                numimg=numimg+1;
+
+                            }
+                            console.log("finiupload"+numimg);
+                        });
+                        request.upload.addEventListener('load',function(event){
+
+                            $(".delete_im_o").on('click',function(){
+                                var courant=$(this).parent();
+                                var index = $(".block tr").index(courant.parent());
+                                var file=$(".block tr:nth-child("+(index+1)+") td:nth-child(1)").text();
+                                $.ajax({
+                                    type:"POST",
+                                    url:"php/unlink.php",
+                                    data: 'file=' + file+'&ida='+ida+'',async:false,
+                                    success:function(data)
+                                    {
+                                        if(data == 1)
+                                        {
+                                            $(".block tr:nth-child("+(index+1)+")").hide("slow", function(){ $(this).remove();numimg--;
+
+                                            if(numimg==0){
+                                                $(".table_image").hide('slow');
+                                            }
+                                            });
+                                        }
+                                        else
+                                        {
 
 
-             var data= new FormData();
-             data.append('ajax','true');
-             data.append('file',imgInput.files[0]);
-             data.append('id',15);
-             var request= new XMLHttpRequest();
-             request.upload.addEventListener('progress',function(event) {
-             if (event.lengthComputable) {
-             var percent = event.loaded / event.total;
-             var progresse = Math.round(percent * 100);
-             $('#img_progresse'+(numimg+1)).width(progresse+'%');
-             $('#img_progresse'+(numimg+1)).html(progresse+'%');
-             }
-                if(progresse==100){
-                    numimg=numimg+1;
+                                        }
+                                    }
 
-                }
-                 console.log("finiupload"+numimg);
-             });
-            request.upload.addEventListener('load',function(event){
-                console.log('ok');
-                $(".delete_im").on('click',function(){
-                    var courant=$(this).parent();
-                    var index = $(".block tr").index(courant.parent());
+
+                                });
 
 
 
+                                for(var j=(index+2);j<=numimg;j++){
 
-                    for(var j=(index+2);j<=numimg;j++){
+                                    $(".block tr:nth-child("+j+") td:nth-child(1)").attr('id',"image_title"+(j)+"");
+                                    $(".block tr:nth-child("+j+") td:nth-child(2)").attr('id',"image_extension"+(j)+"");
+                                    $(".block tr:nth-child("+j+") td:nth-child(3)").attr('id',"image_size"+(j)+"");
 
-                        $(".block tr:nth-child("+j+") td:nth-child(1)").attr('id',"image_title"+(j)+"");
-                        $(".block tr:nth-child("+j+") td:nth-child(2)").attr('id',"image_extension"+(j)+"");
-                        $(".block tr:nth-child("+j+") td:nth-child(3)").attr('id',"image_size"+(j)+"");
-                        $(".block tr:nth-child("+j+") td:nth-child(4) div div"  ).attr('id',"img_progresse"+(j)+"");
+
+                                }
+
+
+                               // numimg=$(".block tr").length;
+                                console.log(numimg);
+
+                            });
+
+
+                        });
+                        request.upload.addEventListener('error',function(event){
+                            alert('upload fail');
+                            $(".block tr:nth-child("+(numimg+1)+")").remove();
+                        });
+                        request.open('POST','php/fichier_edit.php');
+                        request.setRequestHeader('Cache-control','no-cache');
+                        request.send(data);
 
                     }
-
-                    $(".block tr:nth-child("+(index+1)+")").remove();
-                    numimg=$(".block tr").length;
-                    console.log(numimg);
-
-                });
+                }
 
 
             });
-            request.upload.addEventListener('error',function(event){
-                alert('upload fail');
-                $(".block tr:nth-child("+(numimg+1)+")").remove();
 
-            });
-            request.open('POST','fichier.php');
-            request.setRequestHeader('Cache-control','no-cache');
-            request.send(data);
+
 
         }else
-    {
-        alert('type de fichier invalide');
-    }
+        {
+            alert('type de fichier invalide');
+        }
     });
     $("#delete").click(function(){
         $('#file_title').html('------');

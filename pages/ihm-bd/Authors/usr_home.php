@@ -175,7 +175,7 @@ echo'</tbody>
 <script>
 $(document).ready(function() {
 	ident=parseInt($('#ident').val());
-    $('#table').DataTable(  ); 
+    $('#table').DataTable();
 	$("#chargement").hide();
 	$("#inbox").click(function(){
 		
